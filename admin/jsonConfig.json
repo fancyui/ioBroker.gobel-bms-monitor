@@ -1,130 +1,125 @@
 {
   "i18n": true,
-  "type": "panel",
+  "type": "tabs",
   "items": {
-    "main_settings": {
-      "type": "tabs",
+    "tab_connection": {
+      "type": "panel",
+      "label": "Connection Settings",
       "items": {
-        "tab_connection": {
-          "type": "panel",
-          "label": "Connection Settings",
-          "items": {
-            "connectionType": {
-              "type": "select",
-              "label": "Connection Type",
-              "options": [
-                { "value": "serial", "label": "Serial (USB)" },
-                { "value": "wifi", "label": "WiFi" },
-                { "value": "ethernet", "label": "Ethernet" }
-              ],
-              "sm": 6,
-              "md": 4
-            },
-            "bmsType": {
-              "type": "select",
-              "label": "BMS Type",
-              "options": [
-                { "value": "PACE_LV", "label": "PACE_LV" },
-                { "value": "JK_PB", "label": "JK_PB" },
-                { "value": "TDT", "label": "TDT" },
-                { "value": "PACE_LV_WIFI", "label": "PACE_LV_WIFI" }
-              ],
-              "sm": 6,
-              "md": 4
-            },
-            "batteryPort": {
-              "type": "select",
-              "label": "BMS Interface Port",
-              "options": [
-                { "value": "rs232", "label": "RS232" },
-                { "value": "rs485", "label": "RS485" }
-              ],
-              "sm": 6,
-              "md": 4
-            },
-            "divider_serial": {
-              "type": "divider"
-            },
-            "serialPort": {
-              "type": "text",
-              "label": "Serial Port Path",
-              "help": "e.g. /dev/ttyUSB0 or COM3",
-              "hidden": "data.connectionType !== 'serial'",
-              "sm": 6,
-              "md": 4
-            },
-            "baudRate": {
-              "type": "number",
-              "label": "Baud Rate",
-              "hidden": "data.connectionType !== 'serial'",
-              "sm": 6,
-              "md": 4
-            },
-            "divider_ip": {
-              "type": "divider"
-            },
-            "ipAddress": {
-              "type": "text",
-              "label": "IP Address",
-              "hidden": "data.connectionType === 'serial'",
-              "sm": 6,
-              "md": 4
-            },
-            "ipPort": {
-              "type": "number",
-              "label": "IP Port",
-              "hidden": "data.connectionType === 'serial'",
-              "sm": 6,
-              "md": 4
-            }
-          }
+        "connectionType": {
+          "type": "select",
+          "label": "Connection Type",
+          "options": [
+            { "value": "serial", "label": "Serial (USB)" },
+            { "value": "wifi", "label": "WiFi" },
+            { "value": "ethernet", "label": "Ethernet" }
+          ],
+          "sm": 6,
+          "md": 4
         },
-        "tab_options": {
-          "type": "panel",
-          "label": "BMS & Scan Options",
-          "items": {
-            "refreshInterval": {
-              "type": "number",
-              "label": "Data Refresh Interval (seconds)",
-              "min": 1,
-              "max": 300,
-              "sm": 6,
-              "md": 4
-            },
-            "maxParallel": {
-              "type": "number",
-              "label": "Max Parallel Packs Scanned",
-              "min": 1,
-              "max": 16,
-              "sm": 6,
-              "md": 4
-            },
-            "jkDisplayIndexStart": {
-              "type": "select",
-              "label": "JK BMS Display Index Start",
-              "options": [
-                { "value": "01", "label": "Start from pack_01" },
-                { "value": "00", "label": "Start from pack_00" }
-              ],
-              "hidden": "data.bmsType !== 'JK_PB'",
-              "sm": 6,
-              "md": 4
-            },
-            "debug": {
-              "type": "checkbox",
-              "label": "Enable Debug Mode",
-              "help": "Prints verbose protocol frames to adapter logs",
-              "sm": 6,
-              "md": 4
-            },
-            "pythonPath": {
-              "type": "text",
-              "label": "Python Path / Command",
-              "help": "Custom Python path (e.g. /usr/bin/python3 or python). Leave empty for default automatic resolution.",
-              "sm": 6,
-              "md": 4
-            }
-          }
+        "bmsType": {
+          "type": "select",
+          "label": "BMS Type",
+          "options": [
+            { "value": "PACE_LV", "label": "PACE_LV" },
+            { "value": "JK_PB", "label": "JK_PB" },
+            { "value": "TDT", "label": "TDT" },
+            { "value": "PACE_LV_WIFI", "label": "PACE_LV_WIFI" }
+          ],
+          "sm": 6,
+          "md": 4
+        },
+        "batteryPort": {
+          "type": "select",
+          "label": "BMS Interface Port",
+          "options": [
+            { "value": "rs232", "label": "RS232" },
+            { "value": "rs485", "label": "RS485" }
+          ],
+          "sm": 6,
+          "md": 4
+        },
+        "divider_serial": {
+          "type": "divider"
+        },
+        "serialPort": {
+          "type": "text",
+          "label": "Serial Port Path",
+          "help": "e.g. /dev/ttyUSB0 or COM3",
+          "hidden": "data.connectionType !== 'serial'",
+          "sm": 6,
+          "md": 4
+        },
+        "baudRate": {
+          "type": "number",
+          "label": "Baud Rate",
+          "hidden": "data.connectionType !== 'serial'",
+          "sm": 6,
+          "md": 4
+        },
+        "divider_ip": {
+          "type": "divider"
+        },
+        "ipAddress": {
+          "type": "text",
+          "label": "IP Address",
+          "hidden": "data.connectionType === 'serial'",
+          "sm": 6,
+          "md": 4
+        },
+        "ipPort": {
+          "type": "number",
+          "label": "IP Port",
+          "hidden": "data.connectionType === 'serial'",
+          "sm": 6,
+          "md": 4
+        }
+      }
+    },
+    "tab_options": {
+      "type": "panel",
+      "label": "BMS & Scan Options",
+      "items": {
+        "refreshInterval": {
+          "type": "number",
+          "label": "Data Refresh Interval (seconds)",
+          "min": 1,
+          "max": 300,
+          "sm": 6,
+          "md": 4
+        },
+        "maxParallel": {
+          "type": "number",
+          "label": "Max Parallel Packs Scanned",
+          "min": 1,
+          "max": 16,
+          "sm": 6,
+          "md": 4
+        },
+        "jkDisplayIndexStart": {
+          "type": "select",
+          "label": "JK BMS Display Index Start",
+          "options": [
+            { "value": "01", "label": "Start from pack_01" },
+            { "value": "00", "label": "Start from pack_00" }
+          ],
+          "hidden": "data.bmsType !== 'JK_PB'",
+          "sm": 6,
+          "md": 4
+        },
+        "debug": {
+          "type": "checkbox",
+          "label": "Enable Debug Mode",
+          "help": "Prints verbose protocol frames to adapter logs",
+          "sm": 6,
+          "md": 4
+        },
+        "pythonPath": {
+          "type": "text",
+          "label": "Python Path / Command",
+          "help": "Custom Python path (e.g. /usr/bin/python3 or python). Leave empty for default automatic resolution.",
+          "sm": 6,
+          "md": 4
         }
       }
     }
