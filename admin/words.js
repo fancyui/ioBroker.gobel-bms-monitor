@@ -67,5 +67,15 @@ systemDictionary = {
     "en": "Enable Debug Mode",
     "zh-cn": "启用调试模式",
     "de": "Debug-Protokolle aktivieren"
+  },
+  "Python Path / Command": {
+    "en": "Python Path / Command",
+    "zh-cn": "Python 路径 / 命令",
+    "de": "Python-Pfad / Befehl"
+  },
+  "Custom Python path (e.g. /usr/bin/python3 or python). Leave empty for default automatic resolution.": {
+    "en": "Custom Python path (e.g. /usr/bin/python3 or python). Leave empty for default automatic resolution.",
+    "zh-cn": "自定义 Python 路径或命令 (例如 /usr/bin/python3 或 python)。留空以使用默认的自动检测路径。",
+    "de": "Benutzerdefinierter Python-Pfad oder -Befehl (z. B. /usr/bin/python3 oder python). Leer lassen, um die automatische Erkennung zu nutzen."
   }
 };

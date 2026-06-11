@@ -64,7 +64,8 @@
     "refreshInterval": 5,
     "maxParallel": 16,
     "jkDisplayIndexStart": "01",
-    "debug": false
+    "debug": false,
+    "pythonPath": ""
   },
   "objects": [],
   "instanceObjects": [

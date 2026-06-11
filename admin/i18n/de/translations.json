@@ -11,5 +11,7 @@
   "Data Refresh Interval (seconds)": "Datenaktualisierungsintervall (Sekunden)",
   "Max Parallel Packs Scanned": "Maximale parallele Packs",
   "JK BMS Display Index Start": "JKBMS Start-Anzeigeindex",
-  "Enable Debug Mode": "Debug-Protokolle aktivieren"
+  "Enable Debug Mode": "Debug-Protokolle aktivieren",
+  "Python Path / Command": "Python-Pfad / Befehl",
+  "Custom Python path (e.g. /usr/bin/python3 or python). Leave empty for default automatic resolution.": "Benutzerdefinierter Python-Pfad oder -Befehl (z. B. /usr/bin/python3 oder python). Leer lassen, um die automatische Erkennung zu nutzen."
 }

@@ -63,13 +63,14 @@ class GobelBattery extends utils.Adapter {
             args.push('--debug');
         }
 
-        this.log.debug(`Spawn arguments: python3 ${args.join(' ')}`);
+        // Determine the Python command to use: user-configured path, or platform default
+        const defaultCmd = process.platform === 'win32' ? 'python' : 'python3';
+        const pythonCmd = (this.config.pythonPath || defaultCmd).trim();
 
-        // Check platform and select the python binary path
-        const pythonBinary = process.platform === 'win32' ? 'python' : 'python3';
+        this.log.info(`Spawning Python process: "${pythonCmd}" with args: ${args.join(' ')}`);
 
         try {
-            this.pythonProcess = spawn(pythonBinary, args, {
+            this.pythonProcess = spawn(pythonCmd, args, {
                 cwd: path.join(__dirname, 'lib'),
                 env: process.env
             });
@@ -128,12 +129,89 @@ class GobelBattery extends utils.Adapter {
                 }
             });
 
+            // Handle spawn errors (e.g. command not found)
             this.pythonProcess.on('error', (err) => {
-                this.log.error(`Failed to start Python child process: ${err.message}. Please check if Python 3 and pyserial are installed.`);
+                this.log.error(`Failed to start Python child process using "${pythonCmd}": ${err.message}.`);
+                
+                // If it failed due to not finding the command (ENOENT) and the user didn't specify a custom path,
+                // try to fall back to the alternate standard command name (e.g., python3 on Windows or python on Linux).
+                if (err.code === 'ENOENT' && !this.config.pythonPath) {
+                    const fallbackCmd = pythonCmd === 'python' ? 'python3' : 'python';
+                    this.log.info(`Attempting automatic fallback to command: "${fallbackCmd}"...`);
+                    this.attemptFallbackSpawn(fallbackCmd, args);
+                } else {
+                    this.log.error(`Please verify that Python 3 and pyserial are installed, or configure the correct Python Path in the adapter settings.`);
+                }
             });
 
         } catch (err) {
             this.log.error(`Exception spawned during process initialization: ${err.message}`);
+        }
+    }
+
+    /**
+     * Attempts to spawn the python process with a fallback command in case the default command fails
+     * @param {string} fallbackCmd 
+     * @param {string[]} args 
+     */
+    attemptFallbackSpawn(fallbackCmd, args) {
+        try {
+            this.pythonProcess = spawn(fallbackCmd, args, {
+                cwd: path.join(__dirname, 'lib'),
+                env: process.env
+            });
+
+            let buffer = '';
+
+            this.pythonProcess.stdout.on('data', (data) => {
+                buffer += data.toString();
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || '';
+                for (const line of lines) {
+                    const trimmed = line.trim();
+                    if (!trimmed) continue;
+                    if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
+                        try {
+                            const payload = JSON.parse(trimmed);
+                            this.handleBmsData(payload);
+                        } catch (err) {
+                            this.log.warn(`Failed to parse JSON telemetry line: "${trimmed}". Error: ${err.message}`);
+                        }
+                    } else {
+                        this.log.info(`[Python stdout] ${trimmed}`);
+                    }
+                }
+            });
+
+            this.pythonProcess.stderr.on('data', (data) => {
+                const errText = data.toString().trim();
+                if (errText) {
+                    if (errText.includes('Traceback') || errText.includes('Error') || errText.includes('Exception')) {
+                        this.log.error(`[Python stderr] ${errText}`);
+                    } else {
+                        this.log.info(`[Python stderr] ${errText}`);
+                    }
+                }
+            });
+
+            this.pythonProcess.on('exit', (code, signal) => {
+                this.log.warn(`Python BMS reader exited with code ${code} (Signal: ${signal})`);
+                this.pythonProcess = null;
+                this.setState('info.connection', false, true);
+
+                if (!this.isUnloading) {
+                    this.log.info('Restarting Python process in 10 seconds...');
+                    this.reconnectTimeout = setTimeout(() => this.startPythonProcess(), 10000);
+                }
+            });
+
+            this.pythonProcess.on('error', (err) => {
+                this.log.error(`Fallback Python command "${fallbackCmd}" also failed: ${err.message}.`);
+                this.log.error('Please verify that Python 3 and pyserial are installed, or configure the correct Python Path in the adapter settings.');
+            });
+
+        } catch (err) {
+            this.log.error(`Exception spawned during fallback process initialization: ${err.message}`);
         }
     }
 

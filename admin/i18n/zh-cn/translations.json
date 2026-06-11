@@ -11,5 +11,7 @@
   "Data Refresh Interval (seconds)": "数据刷新间隔 (秒)",
   "Max Parallel Packs Scanned": "允许的最大并联电池组数",
   "JK BMS Display Index Start": "JK BMS 显示索引开始方式",
-  "Enable Debug Mode": "启用调试模式"
+  "Enable Debug Mode": "启用调试模式",
+  "Python Path / Command": "Python 路径 / 命令",
+  "Custom Python path (e.g. /usr/bin/python3 or python). Leave empty for default automatic resolution.": "自定义 Python 路径或命令 (例如 /usr/bin/python3 或 python)。留空以使用默认的自动检测路径。"
 }

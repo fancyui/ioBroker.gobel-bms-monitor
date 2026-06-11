@@ -116,6 +116,13 @@
               "help": "Prints verbose protocol frames to adapter logs",
               "sm": 6,
               "md": 4
+            },
+            "pythonPath": {
+              "type": "text",
+              "label": "Python Path / Command",
+              "help": "Custom Python path (e.g. /usr/bin/python3 or python). Leave empty for default automatic resolution.",
+              "sm": 6,
+              "md": 4
             }
           }
         }
