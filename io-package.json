@@ -50,8 +50,9 @@
         "js-controller": ">=3.0.0"
       }
     ],
-    "materialize": true,
-    "jsonConfig": true
+    "adminUI": {
+      "config": "json"
+    }
   },
   "native": {
     "connectionType": "serial",
