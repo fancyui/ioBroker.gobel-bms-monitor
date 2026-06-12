@@ -9,3 +9,8 @@ node_modules/
 .DS_Store
 Thumbs.db
 
+# Python environments and compilation caches
+python-embed/
+python-temp/
+__pycache__/
+*.pyc

@@ -1,0 +1,32 @@
+name: Test and Release
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*'
+  pull_request:
+
+jobs:
+  # Check and lint package and io-package files
+  check-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ioBroker/testing-action-check@v1
+        with:
+          node-version: '20.x'
+          lint: true
+          type-checking: false
+
+  # Run tests across multiple Node.js versions
+  adapter-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+    steps:
+      - uses: ioBroker/testing-action-adapter@v1
+        with:
+          node-version: ${{ matrix.node-version }}

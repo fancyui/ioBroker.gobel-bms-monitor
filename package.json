@@ -1,13 +1,13 @@
 {
   "name": "iobroker.gobel-battery",
-  "version": "1.0.0",
-  "description": "Battery Monitor for Gobel Power Battery BMS (supports PACE, JKBMS, TDT)",
+  "version": "1.0.5",
+  "description": "Battery Monitor for PACE BMS, JKBMS, TDT BMS",
   "author": "fancyui",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "main.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fancyui/Gobel-Battery-ioBroker-Adapter"
+    "url": "https://github.com/fancyui/ioBroker.gobel-battery"
   },
   "engines": {
     "node": ">=16.0.0"

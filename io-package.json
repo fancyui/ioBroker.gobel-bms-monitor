@@ -32,13 +32,16 @@
       "tdt",
       "solar"
     ],
-    "license": "MIT",
+    "license": "Apache-2.0",
     "platform": "Javascript/Node.js",
     "main": "main.js",
     "icon": "gobel-battery.png",
     "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/fancyui/Gobel-Battery-ioBroker-Adapter/master/admin/gobel-battery.png",
-    "readme": "https://github.com/fancyui/Gobel-Battery-ioBroker-Adapter/blob/master/README.md",
+    "extIcon": "https://raw.githubusercontent.com/fancyui/ioBroker.gobel-battery/master/admin/gobel-battery.png",
+    "readme": "https://github.com/fancyui/ioBroker.gobel-battery/blob/master/README.md",
+    "docs": {
+      "en": "README.md"
+    },
     "loglevel": "info",
     "mode": "daemon",
     "type": "energy",
