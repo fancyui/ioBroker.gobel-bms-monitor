@@ -1,0 +1,58 @@
+# ioBroker Gobel Battery Monitor Adapter (PACE, JK, TDT BMS)
+
+Dieser Adapter integriert das Gobel Power Battery BMS (PACE BMS, JK BMS und TDT BMS) in ioBroker und ermöglicht die Echtzeitüberwachung des Batteriezustands, der einzelnen Zellspannungen, des Ladezustands (SoC) und von Warnalarmen.
+
+## Funktionen
+* **Multi-BMS-Kompatibilität**: Unterstützt Pace BMS, JK BMS (55AA-Protokoll) und TDT BMS.
+* **Flexible Schnittstellen**: Verbindung über Seriell (RS232/RS485 USB-Adapter), WLAN oder Ethernet-Konverter.
+* **Automatische Erkennung paralleler Packs**: Die Verbindung mit dem Master-BMS scannt und ordnet automatisch alle parallelen Slave-Batteriepacks zu.
+* **Umfassende Telemetrie**:
+  * Zellspannungen und Temperatursensoren.
+  * Systemwerte: Spannung, Strom, Leistung, SoC, SoH, Kapazität, Zykluszahl, geladene/entladene Energie.
+  * Alarmstatus: Zellüberspannung, Unterspannung, Warnungen bei hoher/niedriger Temperatur, Kurzschluss und Zustand der Lade-/Entlade-MOSFETs.
+
+## Voraussetzungen
+Dieser Adapter führt im Hintergrund einen leichtgewichtigen Python 3-Daemon aus, um mit dem Batterie-BMS zu kommunizieren. Er erfordert **Python (Version 3.8 oder höher)**.
+
+### Automatische Einrichtung (Windows)
+* Wenn Ihr Windows-Rechner mit dem Internet verbunden ist, **lädt der Adapter beim Start automatisch eine portable Python 3.11-Umgebung mit `pyserial` herunter und richtet sie ein**. Sie müssen nichts manuell installieren!
+* Die heruntergeladene Umgebung wird dauerhaft unter `iobroker-data/gobel-battery-python/` zwischengespeichert und bleibt bei Adapter-Updates erhalten.
+
+### Manuelle Einrichtung (Linux / Docker / Windows Offline)
+* **Linux (Debian/Ubuntu/Raspberry Pi OS)**:
+  Verbinden Sie sich per SSH und führen Sie Folgendes aus:
+  ```bash
+  sudo apt-get update
+  sudo apt-get install -y python3 python3-venv
+  ```
+* **Docker-Container (offizielles ioBroker-Image)**:
+  Bearbeiten Sie die Containereinstellungen und fügen Sie `python3` zur Umgebungsvariable `PACKAGES` hinzu. Der Container installiert es beim Start automatisch.
+* **Windows (Offline/Manuelle Einrichtung)**:
+  Laden Sie Python (3.8+) von [python.org](https://www.python.org/) herunter und installieren Sie es. Stellen Sie sicher, dass Sie während der Installation die Option **"Add Python to PATH"** aktivieren.
+
+## Installation des Adapters
+Installieren Sie den Adapter während der Entwicklungs- oder Erstveröffentlichungsphase direkt über GitHub oder ein lokales Verzeichnis:
+* In Ihrem ioBroker-Hauptordner (z. B. `/opt/iobroker` unter Linux):
+  ```bash
+  npm install https://github.com/fancyui/ioBroker.gobel-battery
+  ```
+* Oder fügen Sie ihn über das ioBroker-Admin-Panel hinzu (GitHub-Symbol/Benutzerdefinierte URL).
+
+## Konfiguration
+Konfigurieren Sie die folgenden Optionen im Admin-Panel des Adapters:
+1. **Verbindungstyp**: Wählen Sie `Serial (USB)`, `WiFi` oder `Ethernet`.
+2. **BMS-Typ**: Wählen Sie `PACE_LV`, `JK_PB`, `TDT` oder `PACE_LV_WIFI`.
+3. **BMS-Schnittstellenanschluss**: Wählen Sie `RS232` oder `RS485`.
+4. **Pfad des seriellen Anschlusses** (nur Seriell): `/dev/ttyUSB0` unter Linux oder `COM3` unter Windows.
+5. **Baudrate**: Typischerweise `115200` (Pace/JK) oder `9600`.
+6. **IP-Adresse & Port** (nur WiFi/Ethernet): Geben Sie die IP und den Port (Standard `8899`) Ihres RS232/RS485-zu-WiFi/Ethernet-Servers an.
+7. **Aktualisierungsintervall**: Häufigkeit der BMS-Abfragen (Standard `5` Sekunden).
+8. **Max. parallele Packs**: Scan-Limit für parallele Batterien (bis zu `63`).
+
+## Verkabelungsanleitung
+* **Pace BMS**: Verbinden Sie sich mit dem **RS232**-Anschluss oder über einen WLAN-Konverter. Stellen Sie die DIP-Schalter des Master-BMS auf `1000`.
+* **JK BMS**: Verbinden Sie sich mit der **RS485B**- oder **RS485C**-Schnittstelle. Stellen Sie die DIP-Schalter des Master-BMS auf `0000`.
+* **TDT BMS**: Verbinden Sie sich mit der **RS232**-Schnittstelle.
+
+## Lizenz
+Apache-Lizenz 2.0 (Copyright 2026 fancyui)

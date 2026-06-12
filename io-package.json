@@ -40,7 +40,9 @@
     "extIcon": "https://raw.githubusercontent.com/fancyui/ioBroker.gobel-battery/master/admin/gobel-battery.png",
     "readme": "https://github.com/fancyui/ioBroker.gobel-battery/blob/master/README.md",
     "docs": {
-      "en": "README.md"
+      "en": "README.md",
+      "de": "docs/de/README.md",
+      "zh-cn": "docs/zh-cn/README.md"
     },
     "loglevel": "info",
     "mode": "daemon",
