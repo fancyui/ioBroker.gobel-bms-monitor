@@ -72,8 +72,8 @@ Configure the following options in the adapter admin panel:
 * **WiFi / Ethernet Connection**: If you select `WiFi` or `Ethernet` in the configuration, you will need a serial-to-network module such as **RS232-to-WIFI/Ethernet** or **RS485-to-WIFI/Ethernet** (for example, **Waveshare** modules).
   * *Important*: Configure the network module to operate as a **TCP Server**. The adapter will connect to it as a TCP Client.
 
-### RS485 Pinout Diagram
-For RS485 communication, refer to the pinout below:
+### RS485 Pinout Diagram (For JK BMS)
+For JK BMS RS485 communication, refer to the pinout below:
 
 ![RS485 Pinout](images/rs485a-can-pin.jpg)
 
@@ -87,6 +87,20 @@ For RS485 communication, refer to the pinout below:
 | 6 | GND |
 | 7 | A |
 | 8 | B |
+
+### RS232 Pinout Diagram (For Pace BMS / TDT BMS)
+For Pace BMS and TDT BMS RS232 communication, refer to the pinout below:
+
+![RS232 Pinout](images/rs232-pin.jpg)
+
+| Pin | Signal |
+| :---: | :---: |
+| 1 | NC (Not Connected) |
+| 2 | NC (Not Connected) |
+| 3 | TXD |
+| 4 | RXD |
+| 5 | GND |
+| 6 | NC (Not Connected) |
 
 ### BMS DIP Settings
 * **Pace BMS**: Connect to the **RS232** port or via WiFi converter. Set the Master BMS DIP switches to `1000`.

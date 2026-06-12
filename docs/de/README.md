@@ -58,8 +58,8 @@ Konfigurieren Sie die folgenden Optionen im Admin-Panel des Adapters:
 * **WLAN / Ethernet-Verbindung**: Wenn Sie in der Konfiguration `WiFi` oder `Ethernet` auswählen, benötigen Sie ein Seriell-zu-Netzwerk-Modul wie z. B. **RS232-zu-WIFI/Ethernet** oder **RS485-zu-WIFI/Ethernet** (z. B. Module von **Waveshare**).
   * *Wichtig*: Konfigurieren Sie das Netzwerkmodul so, dass es als **TCP-Server** arbeitet. Der Adapter verbindet sich dann als TCP-Client mit dem Modul.
 
-### RS485 Pinbelegungsdiagramm
-Für die RS485-Kommunikation beziehen Sie sich bitte auf die folgende Pinbelegung:
+### RS485 Pinbelegungsdiagramm (Für JK BMS)
+Für die JK BMS RS485-Kommunikation beziehen Sie sich bitte auf die folgende Pinbelegung:
 
 ![RS485 Pinbelegung](../../images/rs485a-can-pin.jpg)
 
@@ -73,6 +73,20 @@ Für die RS485-Kommunikation beziehen Sie sich bitte auf die folgende Pinbelegun
 | 6 | GND |
 | 7 | A |
 | 8 | B |
+
+### RS232 Pinbelegungsdiagramm (Für Pace BMS / TDT BMS)
+Für die Pace BMS und TDT BMS RS232-Kommunikation beziehen Sie sich bitte auf die folgende Pinbelegung:
+
+![RS232 Pinbelegung](../../images/rs232-pin.jpg)
+
+| Pin | Signal |
+| :---: | :---: |
+| 1 | NC (Nicht verbunden) |
+| 2 | NC (Nicht verbunden) |
+| 3 | TXD |
+| 4 | RXD |
+| 5 | GND |
+| 6 | NC (Nicht verbunden) |
 
 ### BMS DIP-Einstellungen
 * **Pace BMS**: Verbinden Sie sich mit dem **RS232**-Anschluss oder über einen WLAN-Konverter. Stellen Sie die DIP-Schalter des Master-BMS auf `1000`.

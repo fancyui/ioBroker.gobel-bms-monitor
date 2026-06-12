@@ -58,8 +58,8 @@
 * **WiFi / 以太网连接**：如果选择 `WiFi` 或 `Ethernet`，需要使用 **RS232-WIFI/Ethernet** 或 **RS485-WIFI/Ethernet** 模块（例如**微雪 Waveshare**模块）。
   * *重要配置*：请在网络模块的管理界面中，将模块的工作模式设置为 **TCP Server**，且适配器会作为 TCP Client 去连接它。
 
-### RS485 接口针脚定义
-进行 RS485 通信时，请参考以下针脚定义：
+### RS485 接口针脚定义 (适用于 JK BMS)
+进行 JK BMS RS485 通信时，请参考以下针脚定义：
 
 ![RS485 针脚定义](../../images/rs485a-can-pin.jpg)
 
@@ -73,6 +73,20 @@
 | 6 | GND |
 | 7 | A |
 | 8 | B |
+
+### RS232 接口针脚定义 (适用于 Pace BMS / TDT BMS)
+进行 Pace BMS 或 TDT BMS RS232 通信时，请参考以下针脚定义：
+
+![RS232 针脚定义](../../images/rs232-pin.jpg)
+
+| 针脚 (Pin) | 信号 (Signal) |
+| :---: | :---: |
+| 1 | NC (空脚) |
+| 2 | NC (空脚) |
+| 3 | TXD |
+| 4 | RXD |
+| 5 | GND |
+| 6 | NC (空脚) |
 
 ### BMS 拨码开关设置
 * **Pace BMS**：连接到 **RS232** 接口或通过 WiFi 转换器连接。将主机 BMS 的拨码开关（DIP switches）设置为 `1000`。
