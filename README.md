@@ -2,20 +2,20 @@
 description: 
 ---
 
-# ioBroker Gobel Battery Monitor Adapter (PACE, JK, TDT BMS)
+# ioBroker Battery BMS Monitor Adapter (PACE, JK, TDT BMS)
 
 [Deutsch](docs/de/README.md) | [简体中文](docs/zh-cn/README.md)
 
 <!--
-[![NPM version](http://img.shields.io/npm/v/iobroker.gobel-battery.svg)](https://www.npmjs.com/package/iobroker.gobel-battery)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.gobel-battery.svg)](https://www.npmjs.com/package/iobroker.gobel-battery)
-![Number of Installations](http://iobroker.live/badges/gobel-battery-stable.svg)
-[![Dependency Status](https://img.shields.io/david/fancyui/Gobel-Battery-ioBroker-Adapter.svg)](https://david-dm.org/fancyui/Gobel-Battery-ioBroker-Adapter)
+[![NPM version](http://img.shields.io/npm/v/iobroker.battery-bms-monitor.svg)](https://www.npmjs.com/package/iobroker.battery-bms-monitor)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.battery-bms-monitor.svg)](https://www.npmjs.com/package/iobroker.battery-bms-monitor)
+![Number of Installations](http://iobroker.live/badges/battery-bms-monitor-stable.svg)
+[![Dependency Status](https://img.shields.io/david/fancyui/ioBroker.battery-bms-monitor.svg)](https://david-dm.org/fancyui/ioBroker.battery-bms-monitor)
 
-[![NPM](https://nodei.co/npm/iobroker.gobel-battery.png?downloads=true)](https://nodei.co/npm/iobroker.gobel-battery/)
+[![NPM](https://nodei.co/npm/iobroker.battery-bms-monitor.png?downloads=true)](https://nodei.co/npm/iobroker.battery-bms-monitor/)
 -->
 
-This adapter integrates Gobel Power Battery BMS (PACE BMS, JK BMS, and TDT BMS) into ioBroker, allowing real-time monitoring of battery health, individual cell voltages, state of charge (SoC), and warning alarms.
+This adapter is developed by Gobel Power. It integrates compatible Battery BMS (PACE BMS, JK BMS, and TDT BMS) into ioBroker, allowing real-time monitoring of battery health, individual cell voltages, state of charge (SoC), and warning alarms. It can be used for Gobel Power batteries as well as any other batteries using these BMS protocols.
 
 ## Features
 * **Multi-BMS Compatibility**: Supports Pace BMS, JK BMS (55AA protocol), and TDT BMS.
@@ -31,7 +31,7 @@ This adapter runs a lightweight Python 3 daemon in the background to interface w
 
 ### Automatic Setup (Windows)
 * If your Windows machine is connected to the internet, **the adapter will automatically download and set up a portable Python 3.11 environment with `pyserial` on startup**. You do not need to install anything manually!
-* The downloaded environment is cached persistently under `iobroker-data/gobel-battery-python/` and survives adapter updates.
+* The downloaded environment is cached persistently under `iobroker-data/battery-bms-monitor-python/` and survives adapter updates.
 
 ### Manual Setup (Linux / Docker / Windows Offline)
 * **Linux (Debian/Ubuntu/Raspberry Pi OS)**:
@@ -50,7 +50,7 @@ This adapter runs a lightweight Python 3 daemon in the background to interface w
 During the initial release or development phase, install it directly from GitHub or local directory:
 * Inside your ioBroker root folder (e.g., `/opt/iobroker` on Linux):
   ```bash
-  npm install https://github.com/fancyui/ioBroker.gobel-battery
+  npm install https://github.com/fancyui/ioBroker.battery-bms-monitor
   ```
 * Or add it via the ioBroker admin panel (GitHub icon/Custom URL).
 

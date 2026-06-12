@@ -1,8 +1,8 @@
-# ioBroker Gobel Battery Monitor Adapter (PACE, JK, TDT BMS)
+# ioBroker Battery BMS Monitor Adapter (PACE, JK, TDT BMS)
 
 [English](../../README.md) | [简体中文](../zh-cn/README.md)
 
-Dieser Adapter integriert das Gobel Power Battery BMS (PACE BMS, JK BMS und TDT BMS) in ioBroker und ermöglicht die Echtzeitüberwachung des Batteriezustands, der einzelnen Zellspannungen, des Ladezustands (SoC) und von Warnalarmen.
+Dieser Adapter wurde von Gobel Power entwickelt. Er integriert kompatible Batterie-BMS (PACE BMS, JK BMS und TDT BMS) in ioBroker und ermöglicht die Echtzeitüberwachung des Batteriezustands, der einzelnen Zellspannungen, des Ladezustands (SoC) und von Warnalarmen. Er kann sowohl für Gobel Power Batterien als auch für alle anderen Batterien verwendet werden, die diese BMS-Protokolle nutzen.
 
 ## Funktionen
 * **Multi-BMS-Kompatibilität**: Unterstützt Pace BMS, JK BMS (55AA-Protokoll) und TDT BMS.
@@ -18,7 +18,7 @@ Dieser Adapter führt im Hintergrund einen leichtgewichtigen Python 3-Daemon aus
 
 ### Automatische Einrichtung (Windows)
 * Wenn Ihr Windows-Rechner mit dem Internet verbunden ist, **lädt der Adapter beim Start automatisch eine portable Python 3.11-Umgebung mit `pyserial` herunter und richtet sie ein**. Sie müssen nichts manuell installieren!
-* Die heruntergeladene Umgebung wird dauerhaft unter `iobroker-data/gobel-battery-python/` zwischengespeichert und bleibt bei Adapter-Updates erhalten.
+* Die heruntergeladene Umgebung wird dauerhaft unter `iobroker-data/battery-bms-monitor-python/` zwischengespeichert und bleibt bei Adapter-Updates erhalten.
 
 ### Manuelle Einrichtung (Linux / Docker / Windows Offline)
 * **Linux (Debian/Ubuntu/Raspberry Pi OS)**:
@@ -36,7 +36,7 @@ Dieser Adapter führt im Hintergrund einen leichtgewichtigen Python 3-Daemon aus
 Installieren Sie den Adapter während der Entwicklungs- oder Erstveröffentlichungsphase direkt über GitHub oder ein lokales Verzeichnis:
 * In Ihrem ioBroker-Hauptordner (z. B. `/opt/iobroker` unter Linux):
   ```bash
-  npm install https://github.com/fancyui/ioBroker.gobel-battery
+  npm install https://github.com/fancyui/ioBroker.battery-bms-monitor
   ```
 * Oder fügen Sie ihn über das ioBroker-Admin-Panel hinzu (GitHub-Symbol/Benutzerdefinierte URL).
 

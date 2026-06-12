@@ -1,5 +1,5 @@
 {
-  "name": "iobroker.gobel-battery",
+  "name": "iobroker.battery-bms-monitor",
   "version": "1.0.5",
   "description": "Battery Monitor for PACE BMS, JKBMS, TDT BMS",
   "author": "fancyui",
@@ -7,7 +7,7 @@
   "main": "main.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fancyui/ioBroker.gobel-battery"
+    "url": "https://github.com/fancyui/ioBroker.battery-bms-monitor"
   },
   "engines": {
     "node": ">=16.0.0"

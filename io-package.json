@@ -1,6 +1,6 @@
 {
   "common": {
-    "name": "gobel-battery",
+    "name": "battery-bms-monitor",
     "version": "1.0.5",
     "news": {
       "1.0.5": {
@@ -16,9 +16,9 @@
       "de": "Gobel Batteriemonitor"
     },
     "desc": {
-      "en": "Gobel Power Battery Monitor adapter for PACE, JKBMS, and TDT BMS",
-      "zh-cn": "适用于 PACE、JKBMS 和 TDT BMS 的 Gobel Power 电池监控适配器",
-      "de": "Gobel Power Batteriemonitor-Adapter für PACE, JKBMS und TDT BMS"
+      "en": "Battery Monitor adapter by Gobel Power for PACE, JKBMS, and TDT BMS",
+      "zh-cn": "由 Gobel Power 开发的适用于 PACE、JKBMS 和 TDT BMS 的电池监控适配器",
+      "de": "Batteriemonitor-Adapter von Gobel Power für PACE, JKBMS und TDT BMS"
     },
     "authors": [
       "fancyui"
@@ -35,10 +35,10 @@
     "license": "Apache-2.0",
     "platform": "Javascript/Node.js",
     "main": "main.js",
-    "icon": "gobel-battery.png",
+    "icon": "battery-bms-monitor.png",
     "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/fancyui/ioBroker.gobel-battery/master/admin/gobel-battery.png",
-    "readme": "https://github.com/fancyui/ioBroker.gobel-battery/blob/master/README.md",
+    "extIcon": "https://raw.githubusercontent.com/fancyui/ioBroker.battery-bms-monitor/master/admin/battery-bms-monitor.png",
+    "readme": "https://github.com/fancyui/ioBroker.battery-bms-monitor/blob/master/README.md",
     "docs": {
       "en": "README.md",
       "de": "docs/de/README.md",
