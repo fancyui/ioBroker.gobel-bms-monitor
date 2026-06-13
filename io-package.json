@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "gobel-bms-monitor",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "news": {
+      "1.0.6": {
+        "en": "Standardize debug logs, update temperature units for PACE RS485, and add active balance warning sensors.",
+        "zh-cn": "标准化调试日志，更新 PACE RS485 温度单位，并添加主动均衡警告传感器。",
+        "de": "Debug-Logs standardisieren, Temperatureinheiten für PACE RS485 aktualisieren und Warnsensoren für aktiven Ausgleich hinzufügen."
+      },
       "1.0.5": {
         "en": "auto download pyserial",
         "zh-cn": "自动下载 pyserial",

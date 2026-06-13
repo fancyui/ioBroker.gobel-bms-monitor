@@ -288,7 +288,7 @@ class PACEBMS485:
         pack_data['view_SOH'] = round(pack_full_capacity / pack_design_capacity * 100, 0)
 
         # packs_data.append(pack_data)
-    
+        self.logger.debug(f"analog data parsed: {pack_data}")
         return pack_data
     
     
@@ -520,7 +520,7 @@ class PACEBMS485:
             'warn_state_2': pack['warn_state_2']
         }
         # packs_data.append(pack_data)
-    
+        self.logger.debug(f"warning data parsed: {pack_data}")
         return pack_data
     
     
@@ -684,7 +684,6 @@ class PACEBMS485:
             # Parse analog data from response
             self.logger.debug(f"Trying to parse analog data")
             analog_data = self.parse_analog_data(response)
-            self.logger.debug(f"analog data parsed: {analog_data}")
             return analog_data
     
         except Exception as e:
@@ -717,7 +716,6 @@ class PACEBMS485:
             # Parse analog data from response
             self.logger.debug(f"Trying to parse warning data")
             warning_data = self.parse_warning_data(response)
-            self.logger.debug(f"warning data parsed: {warning_data}")
     
             return warning_data
     
@@ -842,7 +840,7 @@ class PACEBMS485:
             'num_cells': 'cells',
             'cell_voltages': 'mV',
             'num_temps': 'NTCs',
-            'temperatures': '℃',
+            'temperatures': '°C',
             'pack_current': 'A',
             'pack_total_voltage': 'V',
             'pack_remain_capacity': 'Ah',
@@ -906,7 +904,7 @@ class PACEBMS485:
             'view_num_cells': 'cells',
             'cell_voltages': 'mV',
             'view_num_temps': 'NTCs',
-            'temperatures': '℃',
+            'temperatures': '°C',
             'view_current': 'A',
             'view_voltage': 'V',
             'view_remain_capacity': 'Ah',
@@ -1186,6 +1184,10 @@ class PACEBMS485:
                     for sub_key, sub_value in value.items():
                         self.ha_comm.publish_binary_sensor_state(sub_value, f"pack_{pack_i:02}_{sub_key}")
                         self.ha_comm.publish_binary_sensor_discovery(f"pack_{pack_i:02}_{sub_key}",icon)
+                elif key in ('balance_state_1', 'balance_state_2'):
+                    icon = "mdi:scale-balance"
+                    self.ha_comm.publish_warn_state(value, f"pack_{pack_i:02}_{key}")
+                    self.ha_comm.publish_warn_discovery(f"pack_{pack_i:02}_{key}", icon)
                 elif key not in ['cell_number', 'temp_sensor_number', 'control_state', 'balance_state_1', 'balance_state_2']:
                     icon = "mdi:battery-heart-variant"
                     self.ha_comm.publish_warn_state(value, f"pack_{pack_i:02}_{key}")

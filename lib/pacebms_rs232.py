@@ -307,6 +307,7 @@ class PACEBMS232:
         else:
             packs_data = self.parse_analog_data_v2(response)
 
+        self.logger.debug(f"analog data parsed: {packs_data}")
         return packs_data
 
     def parse_analog_data_v1(self, response):
@@ -1084,6 +1085,7 @@ class PACEBMS232:
             }
             packs_data.append(pack_data)
     
+        self.logger.debug(f"warning data parsed: {packs_data}")
         return packs_data
     
     
@@ -1810,6 +1812,10 @@ class PACEBMS232:
                     for sub_key, sub_value in value.items():
                         self.ha_comm.publish_binary_sensor_state(sub_value, f"pack_{pack_i:02}_{sub_key}")
                         self.ha_comm.publish_binary_sensor_discovery(f"pack_{pack_i:02}_{sub_key}",icon)
+                elif key in ('balance_state_1', 'balance_state_2'):
+                    icon = "mdi:scale-balance"
+                    self.ha_comm.publish_warn_state(value, f"pack_{pack_i:02}_{key}")
+                    self.ha_comm.publish_warn_discovery(f"pack_{pack_i:02}_{key}", icon)
                 elif key not in ['cell_number', 'temp_sensor_number', 'control_state', 'balance_state_1', 'balance_state_2']:
                     icon = "mdi:battery-heart-variant"
                     self.ha_comm.publish_warn_state(value, f"pack_{pack_i:02}_{key}")

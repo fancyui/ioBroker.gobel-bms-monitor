@@ -311,7 +311,7 @@ class TDTBMS232:
         pack_data['view_SOH'] = round(pack_full_capacity / pack_design_capacity * 100, 0)
 
         # packs_data.append(pack_data)
-    
+        self.logger.debug(f"analog data parsed: {pack_data}")
         return pack_data
     
     
@@ -559,7 +559,7 @@ class TDTBMS232:
             'warn_state_2': pack['warn_state_2']
         }
         # packs_data.append(pack_data)
-    
+        self.logger.debug(f"warning data parsed: {pack_data}")
         return pack_data
     
     
@@ -723,10 +723,8 @@ class TDTBMS232:
             # Parse analog data from response
             self.logger.debug(f"Trying to parse analog data")
             analog_data = self.parse_analog_data(response,pack_number)
-            self.logger.debug(f"analog data parsed: {analog_data}")
             if analog_data is None:
                 return None
-
             return analog_data
     
         except Exception as e:
@@ -759,7 +757,6 @@ class TDTBMS232:
             # Parse analog data from response
             self.logger.debug(f"Trying to parse warning data")
             warning_data = self.parse_warning_data(response,pack_number)
-            self.logger.debug(f"warning data parsed: {warning_data}")
             if warning_data is None:
                 return None
     
@@ -1280,6 +1277,10 @@ class TDTBMS232:
                     for sub_key, sub_value in value.items():
                         self.ha_comm.publish_binary_sensor_state(sub_value, f"pack_{pack_i:02}_{sub_key}")
                         self.ha_comm.publish_binary_sensor_discovery(f"pack_{pack_i:02}_{sub_key}",icon)
+                elif key in ('balance_state_1', 'balance_state_2'):
+                    icon = "mdi:scale-balance"
+                    self.ha_comm.publish_warn_state(value, f"pack_{pack_i:02}_{key}")
+                    self.ha_comm.publish_warn_discovery(f"pack_{pack_i:02}_{key}", icon)
                 elif key not in ['cell_number', 'temp_sensor_number', 'control_state', 'balance_state_1', 'balance_state_2']:
                     icon = "mdi:battery-heart-variant"
                     self.ha_comm.publish_warn_state(value, f"pack_{pack_i:02}_{key}")

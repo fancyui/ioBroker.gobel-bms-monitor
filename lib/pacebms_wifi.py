@@ -152,11 +152,11 @@ class PACEBMSWIFI:
 
         if cid2 == '42':
             self.latest_analog_data = self.parse_analog_data_wifi(fields)
-            self.logger.debug("Parsed analog data successfully")
+            self.logger.debug(f"analog data parsed: {self.latest_analog_data}")
             return True
         elif cid2 == '44':
             self.latest_warning_data = self.parse_warning_data_wifi(fields)
-            self.logger.debug("Parsed warning data successfully")
+            self.logger.debug(f"warning data parsed: {self.latest_warning_data}")
             return True
         else:
             self.logger.warning(f"Unhandled passive CID2/RTN: {cid2}")
@@ -830,6 +830,10 @@ class PACEBMSWIFI:
                     for sub_key, sub_value in value.items():
                         self.ha_comm.publish_binary_sensor_state(sub_value, f"pack_{pack_i:02}_{sub_key}")
                         self.ha_comm.publish_binary_sensor_discovery(f"pack_{pack_i:02}_{sub_key}", icon)
+                elif key in ('balance_state_1', 'balance_state_2'):
+                    icon = "mdi:scale-balance"
+                    self.ha_comm.publish_warn_state(value, f"pack_{pack_i:02}_{key}")
+                    self.ha_comm.publish_warn_discovery(f"pack_{pack_i:02}_{key}", icon)
                 elif key not in ['cell_number', 'temp_sensor_number', 'control_state', 'balance_state_1', 'balance_state_2']:
                     icon = "mdi:battery-heart-variant"
                     self.ha_comm.publish_warn_state(value, f"pack_{pack_i:02}_{key}")
