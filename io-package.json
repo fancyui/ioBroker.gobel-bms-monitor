@@ -1,12 +1,12 @@
 {
   "common": {
     "name": "gobel-bms-monitor",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "news": {
-      "1.0.6": {
-        "en": "Standardize debug logs, update temperature units for PACE RS485, and add active balance warning sensors.",
-        "zh-cn": "标准化调试日志，更新 PACE RS485 温度单位，并添加主动均衡警告传感器。",
-        "de": "Debug-Logs standardisieren, Temperatureinheiten für PACE RS485 aktualisieren und Warnsensoren für aktiven Ausgleich hinzufügen."
+      "1.0.7": {
+        "en": "Separate passive/active balancing sensors, fix TDT crash, add raw telemetry debug logging, standardize logs, and update PACE RS485 temperature units.",
+        "zh-cn": "拆分主动/被动均衡传感器，修复 TDT 崩溃，增加原始报文调试日志，标准化日志，并更新 PACE RS485 温度单位。",
+        "de": "Passive/aktive Ausgleichssensoren aufteilen, TDT-Absturz beheben, rohe Telemetrie-Debuglogs hinzufügen, Logs standardisieren und PACE RS485 Temperatureinheiten aktualisieren."
       },
       "1.0.5": {
         "en": "auto download pyserial",

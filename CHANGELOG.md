@@ -1,7 +1,9 @@
 # Changelog
 
-## 1.0.6 (2026-06-13)
-* (fancyui) Expose active balancing status (`balance_state_1` and `balance_state_2`) warning sensors for PACE (RS232, RS485, WiFi) and TDT BMS protocols.
+## 1.0.7 (2026-06-15)
+* (fancyui) Separate Passive and Active Balancing Status into distinct warning sensors (`balancing_status_passive_1 & 2` for raw bitmasks, `balancing_status_active_1 & 2` for active cell indices 1-8/9-16).
+* (fancyui) Fix TDT ValueError crash when balance state values are greater than 1.
+* (fancyui) Add raw ASCII and Hexadecimal packet logging for telemetry send/receive operations under debug mode.
 * (fancyui) Standardize debug logging format for parsed analog and warning telemetry across JK, PACE, and TDT BMS drivers.
 * (fancyui) Fix cell temperature unit (from '℃' to standard '°C') for PACE RS485.
 
