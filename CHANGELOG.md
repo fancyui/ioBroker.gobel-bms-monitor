@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.9 (2026-06-16)
+* (fancyui) Fix 'Serial' object has no attribute 'gettimeout' AttributeError on serial connections under JK BMS passive listening mode.
+
 ## 1.0.8 (2026-06-16)
 * (fancyui) Fix PACE RS232 protocol desync and telemetry corruption in multi-pack setups via robust structural layout validation.
 * (fancyui) Fix active balancing offsets and index boundary crashes in warning status parsers across PACE RS232, RS485, and TDT RS232 drivers.
