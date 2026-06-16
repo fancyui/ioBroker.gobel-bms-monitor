@@ -467,9 +467,11 @@ class PACEBMS485:
         W = len(warnstate_bytes) - start_warn_idx
         active_bal_1 = 0
         active_bal_2 = 0
-        if W >= 17:
-            active_bal_1 = warnstate_bytes[start_warn_idx + 14]
-            active_bal_2 = warnstate_bytes[start_warn_idx + 15]
+        if W >= 15:
+            if start_warn_idx + 13 < len(warnstate_bytes):
+                active_bal_1 = warnstate_bytes[start_warn_idx + 13]
+            if start_warn_idx + 14 < len(warnstate_bytes):
+                active_bal_2 = warnstate_bytes[start_warn_idx + 14]
 
         def get_balancing_cell(bitmask, offset_cell):
             if not bitmask:
@@ -745,7 +747,6 @@ class PACEBMS485:
             # Parse analog data from response
             self.logger.debug(f"Trying to parse warning data")
             warning_data = self.parse_warning_data(response)
-    
             return warning_data
     
         except Exception as e:

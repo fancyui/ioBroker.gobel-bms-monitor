@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "gobel-bms-monitor",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "news": {
+      "1.0.8": {
+        "en": "Fix PACE RS232 protocol desync and telemetry corruption via robust structural layout validation. Fix active balancing offsets and index boundary crashes.",
+        "zh-cn": "通过结构化数据包验证，修复 PACE RS232 协议失步及数据污染。修复主动均衡偏移及索引越界崩溃问题。",
+        "de": "PACE RS232 Protokoll-Desynchronisation und Telemetriebeschädigung durch robuste strukturelle Layout-Validierung behoben. Aktive Ausgleichs-Offsets und Indexgrenzen-Abstürze behoben."
+      },
       "1.0.7": {
         "en": "Separate passive/active balancing sensors, fix TDT crash, add raw telemetry debug logging, standardize logs, and update PACE RS485 temperature units.",
         "zh-cn": "拆分主动/被动均衡传感器，修复 TDT 崩溃，增加原始报文调试日志，标准化日志，并更新 PACE RS485 温度单位。",

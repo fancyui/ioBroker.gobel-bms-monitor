@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.8 (2026-06-16)
+* (fancyui) Fix PACE RS232 protocol desync and telemetry corruption in multi-pack setups via robust structural layout validation.
+* (fancyui) Fix active balancing offsets and index boundary crashes in warning status parsers across PACE RS232, RS485, and TDT RS232 drivers.
+
 ## 1.0.7 (2026-06-15)
 * (fancyui) Separate Passive and Active Balancing Status into distinct warning sensors (`balancing_status_passive_1 & 2` for raw bitmasks, `balancing_status_active_1 & 2` for active cell indices 1-8/9-16).
 * (fancyui) Fix TDT ValueError crash when balance state values are greater than 1.
