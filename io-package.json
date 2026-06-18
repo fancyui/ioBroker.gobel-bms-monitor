@@ -1,8 +1,18 @@
 {
   "common": {
     "name": "gobel-bms-monitor",
-    "version": "1.0.8",
+    "version": "1.0.10",
     "news": {
+      "1.0.10": {
+        "en": "Add JK BMS average cell voltage, and convert raw 0-based maximum/minimum voltage cell index to 1-based states.",
+        "zh-cn": "添加 JK BMS 平均单体电压，并将原始 0-based 最大/最小电压电芯索引转换为 1-based 状态。",
+        "de": "Durchschnittliche Zellspannung für JK BMS hinzugefügt und roher 0-basierter minimaler/maximaler Zellspannungsindex in 1-basierten Status konvertiert."
+      },
+      "1.0.9": {
+        "en": "Fix 'Serial' object has no attribute 'gettimeout' AttributeError on serial connections under JK BMS passive listening mode.",
+        "zh-cn": "修复 JK BMS 被动监听模式下串口连接时 'Serial' 对象无 'gettimeout' 属性的错误。",
+        "de": "Fehler 'Serial' object has no attribute 'gettimeout' bei seriellen Verbindungen im passiven Abhörmodus des JK BMS behoben."
+      },
       "1.0.8": {
         "en": "Fix PACE RS232 protocol desync and telemetry corruption via robust structural layout validation. Fix active balancing offsets and index boundary crashes.",
         "zh-cn": "通过结构化数据包验证，修复 PACE RS232 协议失步及数据污染。修复主动均衡偏移及索引越界崩溃问题。",

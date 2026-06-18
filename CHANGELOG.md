@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.10 (2026-06-18)
+* (fancyui) Add JK BMS average cell voltage, and convert raw 0-based maximum/minimum voltage cell index to 1-based states.
+
 ## 1.0.9 (2026-06-16)
 * (fancyui) Fix 'Serial' object has no attribute 'gettimeout' AttributeError on serial connections under JK BMS passive listening mode.
 

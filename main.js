@@ -627,6 +627,7 @@ class GobelBmsMonitor extends utils.Adapter {
             'cell_voltage_max_index': { name: 'Max Cell Voltage Index', type: 'number', role: 'info.value' },
             'cell_voltage_min_index': { name: 'Min Cell Voltage Index', type: 'number', role: 'info.value' },
             'cell_voltage_diff': { name: 'Cell Voltage Difference', type: 'number', role: 'value.voltage', unit: 'mV' },
+            'cell_voltage_avg': { name: 'Average Cell Voltage', type: 'number', role: 'value.voltage', unit: 'mV' },
             'view_num_temps': { name: 'Number of Temp Sensors', type: 'number', role: 'info.value', unit: 'sensors' },
             'view_current': { name: 'Current', type: 'number', role: 'value.current', unit: 'A' },
             'view_voltage': { name: 'Voltage', type: 'number', role: 'value.voltage', unit: 'V' },
