@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.12 (2026-06-22)
+* (fancyui) Fix active balancing status parsing incorrectly reporting values due to shifted byte offsets in RS232 and RS485 protocols.
+
 ## 1.0.11 (2026-06-22)
 * (fancyui) Optimize JKBMS passive read startup wait window to ensure all parallel packs check in before completing initial poll.
 

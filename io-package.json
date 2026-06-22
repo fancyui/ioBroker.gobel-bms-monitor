@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "gobel-bms-monitor",
-    "version": "1.0.11",
+    "version": "1.0.12",
     "news": {
+      "1.0.12": {
+        "en": "Fix active balancing status parsing incorrectly reporting values due to shifted byte offsets in RS232 and RS485 protocols.",
+        "zh-cn": "修复由于 RS232 和 RS485 协议中的字节偏移量导致主动均衡状态解析报告值错误的问题。",
+        "de": "Beheben Sie, dass der Parsing-Status für aktives Balancing aufgrund verschobener Byte-Offsets in RS232- und RS485-Protokollen fälschlicherweise Werte meldet."
+      },
       "1.0.11": {
         "en": "Optimize JKBMS passive read startup wait window to ensure all parallel packs check in before completing initial poll.",
         "zh-cn": "优化 JKBMS 被动监听启动等待窗口，以确保在完成初始轮询前所有并联电池包完成登记。",
