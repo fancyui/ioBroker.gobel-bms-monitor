@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "gobel-bms-monitor",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "news": {
+      "1.0.11": {
+        "en": "Optimize JKBMS passive read startup wait window to ensure all parallel packs check in before completing initial poll.",
+        "zh-cn": "优化 JKBMS 被动监听启动等待窗口，以确保在完成初始轮询前所有并联电池包完成登记。",
+        "de": "Optimieren Sie das passive JKBMS-Lese-Startup-Wartefenster, um sicherzustellen, dass alle parallelen Packs vor Abschluss der ersten Abfrage einchecken."
+      },
       "1.0.10": {
         "en": "Add JK BMS average cell voltage, and convert raw 0-based maximum/minimum voltage cell index to 1-based states.",
         "zh-cn": "添加 JK BMS 平均单体电压，并将原始 0-based 最大/最小电压电芯索引转换为 1-based 状态。",

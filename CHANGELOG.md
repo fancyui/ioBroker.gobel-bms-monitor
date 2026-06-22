@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.11 (2026-06-22)
+* (fancyui) Optimize JKBMS passive read startup wait window to ensure all parallel packs check in before completing initial poll.
+
 ## 1.0.10 (2026-06-18)
 * (fancyui) Add JK BMS average cell voltage, and convert raw 0-based maximum/minimum voltage cell index to 1-based states.
 
