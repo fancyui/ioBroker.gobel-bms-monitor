@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "gobel-bms-monitor",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "news": {
+      "1.0.13": {
+        "en": "Fix socket buffer truncation and telemetry protocol desynchronization over Ethernet/WiFi connections by implementing TCP stream buffering and reading until carriage return delimiter.",
+        "zh-cn": "通过实现 TCP 流缓冲和读取至回车符（\\r）定界符，修复了以太网/WiFi 连接上的套接字缓冲区截断和遥测协议失步问题。",
+        "de": "Behebung von Socket-Puffer-Abschneidungen und Telemetrie-Protokoll-Desynchronisationen über Ethernet-/WiFi-Verbindungen durch Implementierung von TCP-Streampufferung und Lesen bis zum Carriage-Return-Begrenzungszeichen."
+      },
       "1.0.12": {
         "en": "Fix active balancing status parsing incorrectly reporting values due to shifted byte offsets in RS232 and RS485 protocols.",
         "zh-cn": "修复由于 RS232 和 RS485 协议中的字节偏移量导致主动均衡状态解析报告值错误的问题。",

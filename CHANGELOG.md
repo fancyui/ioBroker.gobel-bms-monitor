@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.13 (2026-06-24)
+* (fancyui) Fix socket buffer truncation and telemetry protocol desynchronization over Ethernet/WiFi connections by implementing TCP stream buffering and reading until carriage return delimiter.
+
 ## 1.0.12 (2026-06-22)
 * (fancyui) Fix active balancing status parsing incorrectly reporting values due to shifted byte offsets in RS232 and RS485 protocols.
 
