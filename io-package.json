@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "gobel-bms-monitor",
-    "version": "1.0.14",
+    "version": "1.0.15",
     "news": {
+      "1.0.15": {
+        "en": "Fix false-positive structural matches in dynamic U/W byte calculation (e.g. when battery is fully charged and current is 0A) by checking for non-zero cell and temperature counts and utilizing a hybrid division calculation with fallback.",
+        "zh-cn": "通过检查非零的电芯数和温度传感器数，并利用带备用的混合除法计算，修复了在动态 U/W 字节计算中的假阳性结构匹配问题（例如当电池充满电且电流为 0A 时）。",
+        "de": "Behebung von falsch-positiven strukturellen Übereinstimmungen bei der dynamischen U/W-Byte-Berechnung (z. B. wenn die Batterie vollständig geladen ist und der Strom 0 A beträgt) durch Überprüfung auf nicht-null Zell- und Temperaturanzahlen und Verwendung einer hybriden Divisionsberechnung mit Fallback."
+      },
       "1.0.14": {
         "en": "Fix connection recovery hang over Ethernet/WiFi connections when socket exceptions occur by closing the connection and resetting to None.",
         "zh-cn": "通过在套接字异常发生时关闭连接并将其重置为 None，修复了以太网/WiFi 连接上的连接恢复挂起问题。",

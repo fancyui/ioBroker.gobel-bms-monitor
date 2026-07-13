@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.15 (2026-07-13)
+* (fancyui) Fix false-positive structural matches in dynamic U/W byte calculation (e.g., when the battery is fully charged and current is 0A) by enforcing non-zero cell and temperature counts and utilizing a hybrid division calculation with fallback.
+
+## 1.0.14 (2026-06-24)
+* (fancyui) Fix connection recovery hang over Ethernet/WiFi connections when socket exceptions occur by closing the connection and resetting it to None.
+
 ## 1.0.13 (2026-06-24)
 * (fancyui) Fix socket buffer truncation and telemetry protocol desynchronization over Ethernet/WiFi connections by implementing TCP stream buffering and reading until carriage return delimiter.
 
