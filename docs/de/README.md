@@ -27,7 +27,7 @@ Dieser Adapter führt im Hintergrund einen leichtgewichtigen Python 3-Daemon aus
   Verbinden Sie sich per SSH und führen Sie Folgendes aus:
   ```bash
   sudo apt-get update
-  sudo apt-get install -y python3 python3-venv
+  sudo apt-get install -y python3 python3-venv python3-serial
   ```
 * **Docker-Container (offizielles ioBroker-Image)**:
   Bearbeiten Sie die Containereinstellungen und fügen Sie `python3 python3-pip python3-serial` zur Umgebungsvariable `PACKAGES` hinzu. Der Container installiert diese beim Start automatisch.
@@ -37,7 +37,7 @@ Dieser Adapter führt im Hintergrund einen leichtgewichtigen Python 3-Daemon aus
     - PACKAGES=python3 python3-pip python3-serial
   ```
 * **Windows (Offline/Manuelle Einrichtung)**:
-  Laden Sie Python (3.8+) von [python.org](https://www.python.org/) herunter und installieren Sie es. Stellen Sie sicher, dass Sie während der Installation die Option **"Add Python to PATH"** aktivieren.
+  Laden Sie Python (3.8+) von [python.org](https://www.python.org/) herunter und installieren Sie es. Stellen Sie sicher, dass Sie während der Installation die Option **"Add Python to PATH"** aktivieren. Öffnen Sie nach der Installation die Eingabeaufforderung und führen Sie `pip install pyserial` aus.
 
 ## Installation des Adapters
 Installieren Sie den Adapter während der Entwicklungs- oder Erstveröffentlichungsphase direkt über GitHub oder ein lokales Verzeichnis:

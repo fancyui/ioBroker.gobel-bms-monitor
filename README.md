@@ -40,7 +40,7 @@ This adapter runs a lightweight Python 3 daemon in the background to interface w
   Connect via SSH and run:
   ```bash
   sudo apt-get update
-  sudo apt-get install -y python3 python3-venv
+  sudo apt-get install -y python3 python3-venv python3-serial
   ```
 * **Docker Container (ioBroker official image)**:
   Edit the container settings and add `python3 python3-pip python3-serial` to the `PACKAGES` environment variable. The container will automatically install them on startup.
@@ -50,7 +50,7 @@ This adapter runs a lightweight Python 3 daemon in the background to interface w
     - PACKAGES=python3 python3-pip python3-serial
   ```
 * **Windows (Offline/Manual Setup)**:
-  Download and install Python (3.8+) from [python.org](https://www.python.org/). Ensure you check **"Add Python to PATH"** during installation.
+  Download and install Python (3.8+) from [python.org](https://www.python.org/). Ensure you check **"Add Python to PATH"** during installation. After installation, open Command Prompt and run `pip install pyserial`.
 
 
 ## How to Install the Adapter

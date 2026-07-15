@@ -98,30 +98,30 @@ systemDictionary = {
     "zh-cn": "1. Linux / 树莓派系统",
     "de": "1. Linux / Raspberry Pi OS"
   },
-  "Connect to your system via SSH and run the following command to install Python 3 and its virtual environment libraries:\n\nsudo apt-get update && sudo apt-get install -y python3 python3-venv": {
-    "en": "Connect to your system via SSH and run the following command to install Python 3 and its virtual environment libraries:\n\nsudo apt-get update && sudo apt-get install -y python3 python3-venv",
-    "zh-cn": "请使用 SSH 工具连接到您的系统，并执行以下命令安装 Python 3 及其虚拟环境包：\n\nsudo apt-get update && sudo apt-get install -y python3 python3-venv",
-    "de": "Verbinden Sie sich per SSH mit Ihrem System und führen Sie den folgenden Befehl aus, um Python 3 und die zugehörigen Bibliotheken für virtuelle Umgebungen zu installieren:\n\nsudo apt-get update && sudo apt-get install -y python3 python3-venv"
+  "Connect to your system via SSH and run the following command to install Python 3 and its virtual environment libraries:\n\nsudo apt-get update && sudo apt-get install -y python3 python3-venv python3-serial": {
+    "en": "Connect to your system via SSH and run the following command to install Python 3 and its virtual environment libraries:\n\nsudo apt-get update && sudo apt-get install -y python3 python3-venv python3-serial",
+    "zh-cn": "请使用 SSH 工具连接到您的系统，并执行以下命令安装 Python 3 及其虚拟环境与串口依赖包：\n\nsudo apt-get update && sudo apt-get install -y python3 python3-venv python3-serial",
+    "de": "Verbinden Sie sich per SSH mit Ihrem System und führen Sie den folgenden Befehl aus, um Python 3 und die zugehörigen Bibliotheken für virtuelle Umgebungen sowie serielle Verbindungen zu installieren:\n\nsudo apt-get update && sudo apt-get install -y python3 python3-venv python3-serial"
   },
   "2. Docker Containers (ioBroker official image)": {
     "en": "2. Docker Containers (ioBroker official image)",
     "zh-cn": "2. Docker 容器环境 (ioBroker 官方镜像)",
     "de": "2. Docker-Container (offizielles ioBroker-Image)"
   },
-  "If running inside a Docker container (e.g. on Synology, Portainer, or via docker-compose), edit the container settings and add 'python3' to the PACKAGES environment variable. The container will automatically install it on startup.": {
-    "en": "If running inside a Docker container (e.g. on Synology, Portainer, or via docker-compose), edit the container settings and add 'python3' to the PACKAGES environment variable. The container will automatically install it on startup.",
-    "zh-cn": "如果您的 ioBroker 运行在 Docker 容器中（例如群晖 Synology Docker、Portainer 或 docker-compose 部署），请编辑容器的“环境变量”(Environment)，在 PACKAGES 变量中添加 python3（例如：PACKAGES = python3）。容器会在下次启动时自动下载并安装 Python 3。",
-    "de": "Wenn der Adapter in einem Docker-Container ausgeführt wird (z. B. auf einer Synology NAS, in Portainer oder via docker-compose), bearbeiten Sie die Container-Einstellungen und fügen Sie 'python3' zur Umgebungsvariable PACKAGES hinzu. Der Container installiert dies dann automatisch beim Start."
+  "If running inside a Docker container (e.g. on Synology, Portainer, or via docker-compose), edit the container settings and add 'python3 python3-pip python3-serial' to the PACKAGES environment variable. The container will automatically install it on startup.": {
+    "en": "If running inside a Docker container (e.g. on Synology, Portainer, or via docker-compose), edit the container settings and add 'python3 python3-pip python3-serial' to the PACKAGES environment variable. The container will automatically install it on startup.",
+    "zh-cn": "如果您的 ioBroker 运行在 Docker 容器中（例如群晖 Synology Docker、Portainer 或 docker-compose 部署），请编辑容器的“环境变量”(Environment)，在 PACKAGES 变量中添加 python3 python3-pip python3-serial（例如：PACKAGES = python3 python3-pip python3-serial）。容器会在下次启动时自动下载并安装它们。",
+    "de": "Wenn der Adapter in einem Docker-Container ausgeführt wird (z. B. auf einer Synology NAS, in Portainer oder via docker-compose), bearbeiten Sie die Container-Einstellungen und fügen Sie 'python3 python3-pip python3-serial' zur Umgebungsvariable PACKAGES hinzu. Der Container installiert dies dann automatisch beim Start."
   },
   "3. Windows System": {
     "en": "3. Windows System",
     "zh-cn": "3. Windows 系统",
     "de": "3. Windows-System"
   },
-  "If your Windows machine is connected to the internet, the adapter will automatically download and set up a portable Python 3.11 environment with pyserial on startup. If offline or if auto-download fails:\n\n- Download Python (3.8+) from https://www.python.org/downloads/\n- Run the installer and CRITICALLY check the box 'Add Python to PATH'\n- Or enter the absolute path to python.exe in the 'Python Path / Command' setting.": {
-    "en": "If your Windows machine is connected to the internet, the adapter will automatically download and set up a portable Python 3.11 environment with pyserial on startup. If offline or if auto-download fails:\n\n- Download Python (3.8+) from https://www.python.org/downloads/\n- Run the installer and CRITICALLY check the box 'Add Python to PATH'\n- Or enter the absolute path to python.exe in the 'Python Path / Command' setting.",
-    "zh-cn": "如果运行本适配器的 Windows 系统已联网，适配器会在启动时自动为您下载并初始化绿色免安装版 Python 3.11 及 pyserial 依赖包。如果由于离线或网络原因自动下载失败，请：\n\n- 访问 Python 官网 https://www.python.org/downloads/ 下载并运行 Python 安装包（3.8+）\n- 安装时请务必勾选最下方的 'Add Python to PATH'（添加 Python 到 PATH 环境变量）！\n- 或在“自定义 Python 路径或命令”设置项中手动输入您已安装的 python.exe 绝对路径。",
-    "de": "Wenn Ihr Windows-System mit dem Internet verbunden ist, lädt der Adapter beim Start automatisch eine portable Python 3.11-Umgebung mit pyserial herunter. Wenn Sie offline sind oder der automatische Download fehlschlägt:\n\n- Laden Sie Python (3.8+) von https://www.python.org/downloads/ herunter\n- Starten Sie den Installer und aktivieren Sie unbedingt das Kontrollkästchen 'Add Python to PATH'\n- Oder geben Sie den absoluten Pfad zur python.exe im Feld 'Python-Pfad / Befehl' in den Einstellungen ein."
+  "If your Windows machine is connected to the internet, the adapter will automatically download and set up a portable Python 3.11 environment with pyserial on startup. If offline or if auto-download fails:\n\n- Download Python (3.8+) from https://www.python.org/downloads/\n- Run the installer and CRITICALLY check the box 'Add Python to PATH'\n- Open command prompt and run: pip install pyserial\n- Or enter the absolute path to python.exe in the 'Python Path / Command' setting.": {
+    "en": "If your Windows machine is connected to the internet, the adapter will automatically download and set up a portable Python 3.11 environment with pyserial on startup. If offline or if auto-download fails:\n\n- Download Python (3.8+) from https://www.python.org/downloads/\n- Run the installer and CRITICALLY check the box 'Add Python to PATH'\n- Open command prompt and run: pip install pyserial\n- Or enter the absolute path to python.exe in the 'Python Path / Command' setting.",
+    "zh-cn": "如果运行本适配器的 Windows 系统已联网，适配器会在启动时自动为您下载并初始化绿色免安装版 Python 3.11 及 pyserial 依赖包。如果由于离线或网络原因自动下载失败，请：\n\n- 访问 Python 官网 https://www.python.org/downloads/ 下载并运行 Python 安装包（3.8+）\n- 安装时请务必勾选最下方的 'Add Python to PATH'（添加 Python 到 PATH 环境变量）！\n- 安装完成后，打开命令提示符（CMD）并运行命令：pip install pyserial\n- 或在“自定义 Python 路径或命令”设置项中手动输入您已安装的 python.exe 绝对路径。",
+    "de": "Wenn Ihr Windows-System mit dem Internet verbunden ist, lädt der Adapter beim Start automatisch eine portable Python 3.11-Umgebung mit pyserial herunter. Wenn Sie offline sind oder der automatische Download fehlschlägt:\n\n- Laden Sie Python (3.8+) von https://www.python.org/downloads/ herunter\n- Starten Sie den Installer und aktivieren Sie unbedingt das Kontrollkästchen 'Add Python to PATH'\n- Öffnen Sie die Eingabeaufforderung und führen Sie aus: pip install pyserial\n- Oder geben Sie den absoluten Pfad zur python.exe im Feld 'Python-Pfad / Befehl' in den Einstellungen ein."
   }
 };
 

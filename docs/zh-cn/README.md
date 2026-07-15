@@ -27,7 +27,7 @@
   通过 SSH 连接并运行以下命令：
   ```bash
   sudo apt-get update
-  sudo apt-get install -y python3 python3-venv
+  sudo apt-get install -y python3 python3-venv python3-serial
   ```
 * **Docker 容器 (ioBroker 官方镜像)**：
   编辑容器设置，在 `PACKAGES` 环境变量中添加 `python3 python3-pip python3-serial`。容器启动时会自动安装它们。
@@ -37,7 +37,7 @@
     - PACKAGES=python3 python3-pip python3-serial
   ```
 * **Windows (离线/手动安装)**：
-  从 [python.org](https://www.python.org/) 下载并安装 Python (3.8+)。请务必在安装过程中勾选 **"Add Python to PATH"**（将 Python 添加到系统环境变量）。
+  从 [python.org](https://www.python.org/) 下载并安装 Python (3.8+)。请务必在安装过程中勾选 **"Add Python to PATH"**（将 Python 添加到系统环境变量）。安装完成后，打开命令提示符（CMD）并运行 `pip install pyserial`。
 
 ## 如何安装适配器
 在开发或首发阶段，你可以直接从 GitHub 或本地目录安装：
