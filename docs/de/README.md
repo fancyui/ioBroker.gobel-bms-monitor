@@ -16,7 +16,7 @@ Dieser Adapter wurde von Gobel Power entwickelt. Er integriert kompatible Batter
   * Alarmstatus: Zellüberspannung, Unterspannung, Warnungen bei hoher/niedriger Temperatur, Kurzschluss und Zustand der Lade-/Entlade-MOSFETs.
 
 ## Voraussetzungen
-Dieser Adapter führt im Hintergrund einen leichtgewichtigen Python 3-Daemon aus, um mit dem Batterie-BMS zu kommunizieren. Er erfordert **Python (Version 3.8 oder höher)**.
+Dieser Adapter führt im Hintergrund einen leichtgewichtigen Python 3-Daemon aus, um mit dem Batterie-BMS zu kommunizieren. Er erfordert **Python (Version 3.8 oder höher)** und die **pyserial**-Bibliothek.
 
 ### Automatische Einrichtung (Windows)
 * Wenn Ihr Windows-Rechner mit dem Internet verbunden ist, **lädt der Adapter beim Start automatisch eine portable Python 3.11-Umgebung mit `pyserial` herunter und richtet sie ein**. Sie müssen nichts manuell installieren!

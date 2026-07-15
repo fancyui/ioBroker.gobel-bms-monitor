@@ -29,7 +29,7 @@ This adapter is developed by Gobel Power. It integrates compatible Battery BMS (
   * Alarm status: Cell overvoltage, undervoltage, high/low temperature warnings, short circuit, and charge/discharge MOSFET states.
 
 ## Prerequisites
-This adapter runs a lightweight Python 3 daemon in the background to interface with the battery BMS. It requires **Python (version 3.8 or higher)**.
+This adapter runs a lightweight Python 3 daemon in the background to interface with the battery BMS. It requires **Python (version 3.8 or higher)** and the **pyserial** library.
 
 ### Automatic Setup (Windows)
 * If your Windows machine is connected to the internet, **the adapter will automatically download and set up a portable Python 3.11 environment with `pyserial` on startup**. You do not need to install anything manually!
