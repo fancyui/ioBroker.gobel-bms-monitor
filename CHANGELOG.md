@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.16 (2026-07-15)
+* (fancyui) Fix JKBMS485 instantiation TypeError due to parameter mismatch.
+* (fancyui) Update Docker prerequisites in README to include `python3-serial` and add MQTT guide to Home Assistant.
+
 ## 1.0.15 (2026-07-13)
 * (fancyui) Fix false-positive structural matches in dynamic U/W byte calculation (e.g., when the battery is fully charged and current is 0A) by enforcing non-zero cell and temperature counts and utilizing a hybrid division calculation with fallback.
 
