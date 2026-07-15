@@ -31,6 +31,11 @@ Dieser Adapter führt im Hintergrund einen leichtgewichtigen Python 3-Daemon aus
   ```
 * **Docker-Container (offizielles ioBroker-Image)**:
   Bearbeiten Sie die Containereinstellungen und fügen Sie `python3 python3-pip python3-serial` zur Umgebungsvariable `PACKAGES` hinzu. Der Container installiert diese beim Start automatisch.
+  Beispiel (Docker Compose):
+  ```yaml
+  environment:
+    - PACKAGES=python3 python3-pip python3-serial
+  ```
 * **Windows (Offline/Manuelle Einrichtung)**:
   Laden Sie Python (3.8+) von [python.org](https://www.python.org/) herunter und installieren Sie es. Stellen Sie sicher, dass Sie während der Installation die Option **"Add Python to PATH"** aktivieren.
 

@@ -31,6 +31,11 @@
   ```
 * **Docker 容器 (ioBroker 官方镜像)**：
   编辑容器设置，在 `PACKAGES` 环境变量中添加 `python3 python3-pip python3-serial`。容器启动时会自动安装它们。
+  示例 (Docker Compose)：
+  ```yaml
+  environment:
+    - PACKAGES=python3 python3-pip python3-serial
+  ```
 * **Windows (离线/手动安装)**：
   从 [python.org](https://www.python.org/) 下载并安装 Python (3.8+)。请务必在安装过程中勾选 **"Add Python to PATH"**（将 Python 添加到系统环境变量）。
 
