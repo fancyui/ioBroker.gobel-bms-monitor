@@ -78,7 +78,7 @@ def main():
         elif args.bms_type == 'JK_PB':
             if args.port == 'rs485':
                 jk_pack_index_start = 0 if args.jk_start in ['0', '00'] else 1
-                bms = JKBMS485(bms_comm, None, None, args.bms_type, args.refresh, debug_val, 0, jk_pack_index_start)
+                bms = JKBMS485(bms_comm, None, args.bms_type, args.refresh, debug_val, 0, None, jk_pack_index_start)
             else:
                 logger.error(f"Unsupported port '{args.port}' for JK_PB BMS. Only 'rs485' is supported.")
                 sys.exit(1)
