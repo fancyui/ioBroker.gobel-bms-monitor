@@ -30,7 +30,7 @@
   sudo apt-get install -y python3 python3-venv
   ```
 * **Docker 容器 (ioBroker 官方镜像)**：
-  编辑容器设置，在 `PACKAGES` 环境变量中添加 `python3`。容器启动时会自动安装它。
+  编辑容器设置，在 `PACKAGES` 环境变量中添加 `python3 python3-pip python3-serial`。容器启动时会自动安装它们。
 * **Windows (离线/手动安装)**：
   从 [python.org](https://www.python.org/) 下载并安装 Python (3.8+)。请务必在安装过程中勾选 **"Add Python to PATH"**（将 Python 添加到系统环境变量）。
 
@@ -45,7 +45,7 @@
 ## 配置项
 在适配器管理面板中配置以下选项：
 1. **连接类型 (Connection Type)**：选择 `Serial (USB)`、`WiFi` 或 `Ethernet`。
-2. **BMS 类型 (BMS Type)**：选择 `PACE_LV`、`JK_PB`、`TDT` 或 `PACE_LV_WIFI`。（注意：`PACE_LV_WIFI` 仅用于 Gobel Power 自带 WIFI 接口的电池）。
+2. **BMS 类型 (BMS Type)**：选择 `PACE_LV`、`JK_PB`, `TDT` 或 `PACE_LV_WIFI`。（注意：`PACE_LV_WIFI` 仅用于 Gobel Power 自带 WIFI 接口的电池）。
 3. **BMS 接口类型 (BMS Interface Port)**：选择 `RS232` 或 `RS485`。
 4. **串口路径 (Serial Port Path)**（仅限串口）：Linux 上为 `/dev/ttyUSB0`，Windows 上为 `COM3`。
 5. **波特率 (Baud Rate)**：通常为 `115200`（Pace/JK）或 `9600`。
@@ -94,6 +94,19 @@
 * **Pace BMS**：连接到 **RS232** 接口或通过 WiFi 转换器连接。将主机 BMS 的拨码开关（DIP switches）设置为 `1000`。
 * **JK BMS**：连接到 **RS485B** 或 **RS485C** 接口。将主机 BMS 的拨码开关设置为 `0000`。
 * **TDT BMS**：连接到 **RS232** 接口。
+
+## 如何将数据传输到 Home Assistant
+如果你想将电池数据从 ioBroker 传输到已有的 Home Assistant 实例，可以通过 MQTT 协议轻松实现：
+
+1. **在 ioBroker 中安装 MQTT 客户端适配器**：
+   * 在 ioBroker 管理后台中，搜索并安装 **mqtt-client** 适配器。
+   * 配置该适配器连接到你已有的 Home Assistant MQTT 代理（broker）。
+2. **启用 BMS 数据对象的 MQTT 发布**：
+   * 导航至 ioBroker 管理后台的**对象 (Objects)**标签页。
+   * 展开 `gobel-bms-monitor.<实例>` 文件夹结构，找到你想发布的对应状态 data。
+   * 点击该状态数据行最右侧的**自定义设置（齿轮图标）**。
+   * 启用 **mqtt-client** 设置，勾选**启用**，并确保 **发布 (Publish)** 选项已激活。
+   * 保存设置。此时 ioBroker 将自动把这些电池状态发布到你的 Home Assistant MQTT 服务器中。
 
 ## 许可证
 Apache License 2.0 (Copyright 2026 fancyui)

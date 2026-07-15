@@ -43,7 +43,7 @@ This adapter runs a lightweight Python 3 daemon in the background to interface w
   sudo apt-get install -y python3 python3-venv
   ```
 * **Docker Container (ioBroker official image)**:
-  Edit the container settings and add `python3` to the `PACKAGES` environment variable. The container will automatically install it on startup.
+  Edit the container settings and add `python3 python3-pip python3-serial` to the `PACKAGES` environment variable. The container will automatically install them on startup.
 * **Windows (Offline/Manual Setup)**:
   Download and install Python (3.8+) from [python.org](https://www.python.org/). Ensure you check **"Add Python to PATH"** during installation.
 
@@ -108,6 +108,19 @@ For Pace BMS and TDT BMS RS232 communication, refer to the pinout below:
 * **Pace BMS**: Connect to the **RS232** port or via WiFi converter. Set the Master BMS DIP switches to `1000`.
 * **JK BMS**: Connect to the **RS485B** or **RS485C** interface. Set the Master BMS DIP switches to `0000`.
 * **TDT BMS**: Connect to the **RS232** interface.
+
+## How to Transfer Data to Home Assistant
+If you want to transfer the battery data from ioBroker to an existing Home Assistant instance, you can do so easily via MQTT:
+
+1. **Install the MQTT Client Adapter in ioBroker**:
+   * In ioBroker Admin, search for and install the **mqtt-client** adapter.
+   * Configure it to connect to your existing Home Assistant MQTT broker.
+2. **Enable MQTT Publishing for BMS States**:
+   * Navigate to the **Objects** tab in the ioBroker Admin panel.
+   * Expand the folder structure for `gobel-bms-monitor.<instance>` until you find the states you want to publish.
+   * Click on the **Custom settings** (gear icon) at the far right of the state row.
+   * Enable the settings under **mqtt-client**, tick **Enable**, and ensure the **Publish** action is active.
+   * Save the settings. ioBroker will now automatically publish these states to your Home Assistant MQTT broker.
 
 ## License
 Apache License 2.0 (Copyright 2026 fancyui)

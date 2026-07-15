@@ -30,7 +30,7 @@ Dieser Adapter führt im Hintergrund einen leichtgewichtigen Python 3-Daemon aus
   sudo apt-get install -y python3 python3-venv
   ```
 * **Docker-Container (offizielles ioBroker-Image)**:
-  Bearbeiten Sie die Containereinstellungen und fügen Sie `python3` zur Umgebungsvariable `PACKAGES` hinzu. Der Container installiert es beim Start automatisch.
+  Bearbeiten Sie die Containereinstellungen und fügen Sie `python3 python3-pip python3-serial` zur Umgebungsvariable `PACKAGES` hinzu. Der Container installiert diese beim Start automatisch.
 * **Windows (Offline/Manuelle Einrichtung)**:
   Laden Sie Python (3.8+) von [python.org](https://www.python.org/) herunter und installieren Sie es. Stellen Sie sicher, dass Sie während der Installation die Option **"Add Python to PATH"** aktivieren.
 
@@ -94,6 +94,19 @@ Für die Pace BMS und TDT BMS RS232-Kommunikation beziehen Sie sich bitte auf di
 * **Pace BMS**: Verbinden Sie sich mit dem **RS232**-Anschluss oder über einen WLAN-Konverter. Stellen Sie die DIP-Schalter des Master-BMS auf `1000`.
 * **JK BMS**: Verbinden Sie sich mit der **RS485B**- oder **RS485C**-Schnittstelle. Stellen Sie die DIP-Schalter des Master-BMS auf `0000`.
 * **TDT BMS**: Verbinden Sie sich mit der **RS232**-Schnittstelle.
+
+## So übertragen Sie Daten an Home Assistant
+Wenn Sie Batteriedaten von ioBroker an eine vorhandene Home Assistant-Instanz übertragen möchten, können Sie dies einfach über MQTT tun:
+
+1. **Installieren Sie den MQTT-Client-Adapter in ioBroker**:
+   * Suchen Sie im ioBroker-Admin nach dem Adapter **mqtt-client** und installieren Sie ihn.
+   * Konfigurieren Sie ihn so, dass er eine Verbindung zu Ihrem vorhandenen Home Assistant MQTT-Broker herstellt.
+2. **Aktivieren Sie das MQTT-Publishing für BMS-Zustände**:
+   * Navigieren Sie im ioBroker-Admin-Panel zur Registerkarte **Objekte**.
+   * Erweitern Sie die Ordnerstruktur für `gobel-bms-monitor.<Instanz>`, bis Sie die Zustände finden, die Sie veröffentlichen möchten.
+   * Klicken Sie ganz rechts in der Zeile des jeweiligen Zustands auf das Symbol **Zahnrad (Benutzerdefinierte Einstellungen)**.
+   * Aktivieren Sie die Einstellungen unter **mqtt-client**, setzen Sie das Häkchen bei **Aktivieren** und stellen Sie sicher, dass die Aktion **Veröffentlichen** (Publish) aktiv ist.
+   * Speichern Sie die Einstellungen. ioBroker veröffentlicht diese Zustände nun automatisch auf Ihrem Home Assistant MQTT-Broker.
 
 ## Lizenz
 Apache-Lizenz 2.0 (Copyright 2026 fancyui)
