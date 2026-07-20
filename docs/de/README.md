@@ -100,18 +100,110 @@ Für die Pace BMS und TDT BMS RS232-Kommunikation beziehen Sie sich bitte auf di
 * **JK BMS**: Verbinden Sie sich mit der **RS485B**- oder **RS485C**-Schnittstelle. Stellen Sie die DIP-Schalter des Master-BMS auf `0000`.
 * **TDT BMS**: Verbinden Sie sich mit der **RS232**-Schnittstelle.
 
-## So übertragen Sie Daten an Home Assistant
-Wenn Sie Batteriedaten von ioBroker an eine vorhandene Home Assistant-Instanz übertragen möchten, können Sie dies einfach über MQTT tun:
+## BMS Funktions- & Telemetrie-Verfügbarkeitsmatrix
 
-1. **Installieren Sie den MQTT-Client-Adapter in ioBroker**:
-   * Suchen Sie im ioBroker-Admin nach dem Adapter **mqtt-client** und installieren Sie ihn.
-   * Konfigurieren Sie ihn so, dass er eine Verbindung zu Ihrem vorhandenen Home Assistant MQTT-Broker herstellt.
-2. **Aktivieren Sie das MQTT-Publishing für BMS-Zustände**:
-   * Navigieren Sie im ioBroker-Admin-Panel zur Registerkarte **Objekte**.
-   * Erweitern Sie die Ordnerstruktur für `gobel-bms-monitor.<Instanz>`, bis Sie die Zustände finden, die Sie veröffentlichen möchten.
-   * Klicken Sie ganz rechts in der Zeile des jeweiligen Zustands auf das Symbol **Zahnrad (Benutzerdefinierte Einstellungen)**.
-   * Aktivieren Sie die Einstellungen unter **mqtt-client**, setzen Sie das Häkchen bei **Aktivieren** und stellen Sie sicher, dass die Aktion **Veröffentlichen** (Publish) aktiv ist.
-   * Speichern Sie die Einstellungen. ioBroker veröffentlicht diese Zustände nun automatisch auf Ihrem Home Assistant MQTT-Broker.
+Die verfügbaren Telemetriedaten und Konfigurationsparameter hängen vom BMS-Modell und dem von Ihrer Batterie-Hardware unterstützten Protokoll ab:
+
+| Telemetrie / Parameter | Pace BMS (RS232/RS485/WiFi) | JK BMS (55AA-Protokoll) | TDT BMS (RS232) |
+| :--- | :---: | :---: | :---: |
+| Spannung, Strom, Leistung, SoC, SoH | ✅ | ✅ | ✅ |
+| Verbleibende / Volle / Design-Kapazität | ✅ | ✅ | ✅ |
+| Zykluszahl | ✅ | ✅ | ✅ |
+| Einzelne Zellspannungen & Min/Max/Diff | ✅ | ✅ | ✅ |
+| Temperatursensoren (Zellen / Umgebung) | ✅ | ✅ | ✅ |
+| MOSFET-Temperatursensor | ✅ | ✅ | ✅ |
+| Lade- / Entlade-MOSFET-Steuerungszustände | ✅ | ✅ | ❌ |
+| Aktiver Balancer-Strom & Auslöse-Einstellungen | ❌ | ✅ | ❌ |
+| Kumulierte geladene / entladene Energie (Wh) | ✅ | ❌ | ✅ |
+| Zell-Innenwiderstände (mΩ) | ❌ | ✅ | ❌ |
+| Umfassende Alarme (OVP, UVP, OTP, UTP, OCP) | ✅ | ✅ | ✅ |
+
+## Glossar der Telemetrie- & Sensor-Definitionen
+
+Nachfolgend finden Sie eine Übersicht der wichtigsten Sensorzustände, ihre genaue physikalische Bedeutung, Einheiten und BMS-Zuordnungen:
+
+| Zustandsschlüssel / Feldname | Name (Friendly Name) | Einheit / Typ | Unterstütztes BMS | Beschreibung / Klarstellung |
+| :--- | :--- | :---: | :---: | :--- |
+| `view_voltage` | Voltage | V | Alle (Pace / JK / TDT) | **Telemetrie**: Gesamte Batteriepack-Spannung. |
+| `view_current` | Current | A | Alle (Pace / JK / TDT) | **Telemetrie**: Gesamter Batteriepack-Strom (Positiv: Laden, Negativ: Entladen). |
+| `view_power` | Power | kW | Alle (Pace / JK / TDT) | **Telemetrie**: Berechnete Echtzeit-Batterieleistung. |
+| `view_SOC` | State of Charge (SOC) | % | Alle (Pace / JK / TDT) | **Telemetrie**: Ladezustand der Batterie in Prozent (0-100%). |
+| `view_SOH` | State of Health (SOH) | % | Alle (Pace / JK / TDT) | **Telemetrie**: Alterungszustand/Gesundheit der Batterie in Prozent (0-100%). |
+| `view_remain_capacity` | Remaining Capacity | Ah | Alle (Pace / JK / TDT) | **Telemetrie**: Verbleibende Batteriekapazität in Ampere-Stunden. |
+| `view_full_capacity` | Full Charge Capacity | Ah | Alle (Pace / JK / TDT) | **Telemetrie**: Volle Ladekapazität in Ampere-Stunden. |
+| `view_design_capacity` | Design Capacity | Ah | Alle (Pace / JK / TDT) | **Telemetrie**: Werkseitig angegebene Nennkapazität in Ampere-Stunden. |
+| `view_cycle_number` | Cycle Count | Zyklen | Alle (Pace / JK / TDT) | **Statistik**: Gesamtzahl der Lade-/Entladezyklen. |
+| `cell_voltages` | Cell Voltages | mV | Alle (Pace / JK / TDT) | **Telemetrie**: Einzelne Zellspannungen (automatisch aufgeteilt unter `cells.cell_XX`). |
+| `temperatures` | Temperatures | °C | Alle (Pace / JK / TDT) | **Telemetrie**: Einzelne Temperatursensoren (automatisch aufgeteilt unter `temperatures.temp_XX`). |
+| `view_energy_charged` | Interval Charged Energy | Wh | Pace / TDT | **Intervall-Energie**: Im Abfrageintervall (z. B. 5 Sekunden) berechnete geladene Energie. |
+| `view_energy_discharged` | Interval Discharged Energy | Wh | Pace / TDT | **Intervall-Energie**: Im Abfrageintervall (z. B. 5 Sekunden) berechnete entladene Energie. |
+| `charge_mos_state` | Charge MOSFET Control State | Boolean | Pace / JK | **Hardware-Steuerung**: Schaltzustand des Lade-MOSFETs (True: EIN / False: AUS). |
+| `discharge_mos_state` | Discharge MOSFET Control State | Boolean | Pace / JK | **Hardware-Steuerung**: Schaltzustand des Entlade-MOSFETs (True: EIN / False: AUS). |
+| `view_bat_charge_en` | Battery Charge Enable Setting | 0 / 1 | JK BMS | **BMS-Einstellung**: Zeigt an, ob das Laden in der BMS-Logik aktiviert ist (1: Aktiviert / 0: Deaktiviert). |
+| `view_bat_discharge_en` | Battery Discharge Enable Setting | 0 / 1 | JK BMS | **BMS-Einstellung**: Zeigt an, ob das Entladen in der BMS-Logik aktiviert ist (1: Aktiviert / 0: Deaktiviert). |
+| `view_charger_plugged` | Charger Connection Status | 0 / 1 | JK BMS | **Physische Erkennung**: Zeigt an, ob ein Ladestecker physisch erkannt wurde (1: Eingesteckt / 0: Nicht eingesteckt). |
+| `view_vol_charge_cur` | Charge Current Sensor Voltage | mV | JK BMS | **Sensor-AD-Spannung**: Rohe Abtastspannung des Ladestromsensors (Millivolt). |
+| `view_vol_discharge_cur` | Discharge Current Sensor Voltage | mV | JK BMS | **Sensor-AD-Spannung**: Rohe Abtastspannung des Entladestromsensors (Millivolt). |
+| `view_balan_en` | Active Balance Enable Setting | 0 / 1 | JK BMS | **BMS-Einstellung**: Zeigt an, ob das aktive Ausgleichen (Balancing) aktiviert ist (1: Aktiviert / 0: Deaktiviert). |
+| `view_cur_balan_max` | Max Active Balance Current | A | JK BMS | **Equalizer-Spezifikation**: Maximaler Balancer-Strom des Ausgleichers. |
+| `view_vol_start_balan` | Balance Trigger Voltage Threshold | V | JK BMS | **Auslöseschwelle**: Mindestzellspannung zum Aktivieren des Ausgleichs. |
+| `cell_resistances` | Cell Resistances | mΩ | JK BMS | **Innenwiderstand**: Array der Zell-Innenwiderstände (automatisch aufgeteilt unter `cell_resistances.cell_res_XX`). |
+| `view_temp_mos` | MOSFET Temperature | °C | Alle (Pace / JK / TDT) | **Telemetrie**: Temperatursensor der MOSFET-Leistungsstufe. |
+| `view_heating_state` | Heating Control State | 0 / 1 | JK BMS | **Steuerstatus**: Zeigt an, ob die Heizfolie aktiv ist (1: Heizt / 0: Inaktiv). |
+| `view_heat_current` | Heating Current | A | JK BMS | **Telemetrie**: Stromverbrauch der Batterieheizung. |
+| `define_number_p` | Parallel Pack Count Definition | Zahl | Pace BMS | **BMS-Konfiguration**: Hardwareseitig definierte Anzahl paralleler Packs. |
+
+### Was bedeuten `view_energy_charged` und `view_energy_discharged`?
+
+**Wichtige Definition**: Die meisten BMS-Protokolle **speichern keinen integrierten Hardware-Energieverbrauchszähler (kWh)**. Daher sind `view_energy_charged` und `view_energy_discharged` **KEINE Gesamtzählerstände der Batterie seit der Herstellung**.
+
+Stattdessen stellen sie **per Software berechnete Energie-Zuwächse für das aktuelle Abfrageintervall** (z. B. über 5 Sekunden) dar:
+
+$$\Delta E = |P| \times \Delta t \times \frac{1000}{3600} \text{ (Wh)}$$
+
+- **Bedeutung der Werte**: Bei jeder Abfrage berechnet der Adapter die geladene oder entladene Energie $\Delta E$ (in Wattstunden) für genau dieses Abfragefenster ($\Delta t$, z. B. 5s) basierend auf der Momentanleistung $P$ (kW).
+- **Eigenständige Summation erforderlich**: Da diese Werte kurzzeitige Intervalldeltas darstellen (oder flüchtige Speicherakkumulatoren während der Laufzeit), **müssen Benutzer, die eine dauerhafte Gesamt-Energiemessung (täglich, monatlich oder gesamt kWh) wünschen, diese Werte im Smart-Home-System selbst aufsummieren**:
+  - **In Home Assistant**: Nutzen Sie den Helfer **`utility_meter`** oder den **`integration`**-Sensor (Riemann-Summe), um dauerhafte Tages-/Gesamt-kWh-Entitäten zu erzeugen.
+  - **In ioBroker**: Nutzen Sie die Adapter **Statistics**, **History** oder **SQL-Datenbank**, um die Intervalldaten aufzusummieren und dauerhaft zu speichern.
+
+## Tipps & Tricks: Verarbeitung & Weiterleitung von Array-Sensoren an Home Assistant
+
+Während der Adapter `cell_voltages`, `temperatures` und `cell_resistances` automatisch in einzelne Zustandsobjekte (z. B. `cell_res_01`, `cell_res_02`) aufteilt, können Sie auch benutzerdefinierte ioBroker **Aliase** erstellen, um Werte vor dem Senden über MQTT an Home Assistant neu zuzuordnen.
+
+So erstellen Sie einen Alias für den Index 0 (`val[0]`):
+1. Öffnen Sie im ioBroker-Admin die Registerkarte **Objekte**.
+2. Erstellen Sie ein neues Zustandsobjekt unter `alias.0` (z. B. `alias.0.gobel-bms-monitor.0.pack_00.cell_res_01`).
+3. Konfigurieren Sie die Objekt-JSON wie folgt:
+
+```json
+{
+  "_id": "alias.0.gobel-bms-monitor.0.pack_00.cell_res_01",
+  "type": "state",
+  "common": {
+    "name": "Cell Resistance 01",
+    "type": "number",
+    "unit": "mΩ",
+    "alias": {
+      "id": "gobel-bms-monitor.0.pack_00.cell_resistances",
+      "read": "val[0]"
+    },
+    "role": "value",
+    "read": true,
+    "write": false,
+    "custom": {
+      "mqtt-client.0": {
+        "enabled": true,
+        "publish": true,
+        "pubChangesOnly": false,
+        "pubAsObject": false,
+        "qos": false,
+        "retain": false
+      }
+    }
+  },
+  "native": {}
+}
+```
 
 ## Lizenz
 Apache-Lizenz 2.0 (Copyright 2026 fancyui)

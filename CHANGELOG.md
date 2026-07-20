@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.17 (2026-07-20)
+* (fancyui) Expand state definitions mapping in `main.js` with unabbreviated human-readable names, roles, and units across PACE, JK, and TDT BMSs.
+* (fancyui) Automatically expand `cell_resistances` array into individual cell resistance state objects (`cell_res_01`..`16`).
+* (fancyui) Add BMS Feature Availability Matrix, Telemetry Glossary, and Interval Energy Calculation Disclaimer in English, Chinese, and German documentation.
+
 ## 1.0.16 (2026-07-15)
 * (fancyui) Fix JKBMS485 instantiation TypeError due to parameter mismatch.
 * (fancyui) Update Docker prerequisites in README to include `python3-serial` and add MQTT guide to Home Assistant.

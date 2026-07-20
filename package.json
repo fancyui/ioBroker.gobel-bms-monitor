@@ -1,6 +1,6 @@
 {
   "name": "iobroker.gobel-bms-monitor",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Battery Monitor for PACE BMS, JKBMS, TDT BMS",
   "author": "fancyui",
   "license": "Apache-2.0",

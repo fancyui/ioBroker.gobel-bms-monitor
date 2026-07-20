@@ -622,6 +622,7 @@ class GobelBmsMonitor extends utils.Adapter {
 
         // Field configurations mapping python dict key to state config
         const fieldDefinitions = {
+            // General Telemetry
             'view_num_cells': { name: 'Number of Cells', type: 'number', role: 'info.value', unit: 'cells' },
             'cell_voltage_max': { name: 'Max Cell Voltage', type: 'number', role: 'value.voltage', unit: 'mV' },
             'cell_voltage_min': { name: 'Min Cell Voltage', type: 'number', role: 'value.voltage', unit: 'mV' },
@@ -633,17 +634,77 @@ class GobelBmsMonitor extends utils.Adapter {
             'view_current': { name: 'Current', type: 'number', role: 'value.current', unit: 'A' },
             'view_voltage': { name: 'Voltage', type: 'number', role: 'value.voltage', unit: 'V' },
             'view_power': { name: 'Power', type: 'number', role: 'value.power', unit: 'kW' },
-            'view_energy_charged': { name: 'Total Charged Energy', type: 'number', role: 'value.energy', unit: 'Wh' },
-            'view_energy_discharged': { name: 'Total Discharged Energy', type: 'number', role: 'value.energy', unit: 'Wh' },
+            'view_energy_charged': { name: 'Interval Charged Energy', type: 'number', role: 'value.energy', unit: 'Wh' },
+            'view_energy_discharged': { name: 'Interval Discharged Energy', type: 'number', role: 'value.energy', unit: 'Wh' },
             'view_remain_capacity': { name: 'Remaining Capacity', type: 'number', role: 'value.capacity', unit: 'Ah' },
             'view_full_capacity': { name: 'Full Charge Capacity', type: 'number', role: 'value.capacity', unit: 'Ah' },
             'view_design_capacity': { name: 'Design Capacity', type: 'number', role: 'value.capacity', unit: 'Ah' },
-            'view_SOC': { name: 'State of Charge', type: 'number', role: 'value.battery', unit: '%' },
-            'view_SOH': { name: 'State of Health', type: 'number', role: 'value.battery', unit: '%' },
+            'view_SOC': { name: 'State of Charge (SOC)', type: 'number', role: 'value.battery', unit: '%' },
+            'view_SOH': { name: 'State of Health (SOH)', type: 'number', role: 'value.battery', unit: '%' },
             'view_cycle_number': { name: 'Cycle Count', type: 'number', role: 'value.history', unit: 'cycles' },
-            'define_number_p': { name: 'Define Number P', type: 'number', role: 'info.value' },
+            'define_number_p': { name: 'Parallel Pack Count Definition', type: 'number', role: 'info.value' },
             'hardware_version': { name: 'Hardware Version', type: 'string', role: 'info.hardware' },
-            'software_version': { name: 'Software Version', type: 'string', role: 'info.software' }
+            'software_version': { name: 'Software Version', type: 'string', role: 'info.software' },
+
+            // MOS & Physical Controls / Statuses
+            'charge_mos_state': { name: 'Charge MOSFET Control State', type: 'boolean', role: 'indicator.status' },
+            'discharge_mos_state': { name: 'Discharge MOSFET Control State', type: 'boolean', role: 'indicator.status' },
+            'view_bat_charge_en': { name: 'Battery Charge Enable Setting', type: 'number', role: 'info.status' },
+            'view_bat_discharge_en': { name: 'Battery Discharge Enable Setting', type: 'number', role: 'info.status' },
+            'view_charger_plugged': { name: 'Charger Connection Status', type: 'number', role: 'indicator.connected' },
+            'view_vol_charge_cur': { name: 'Charge Current Sensor Voltage', type: 'number', role: 'value.voltage', unit: 'mV' },
+            'view_vol_discharge_cur': { name: 'Discharge Current Sensor Voltage', type: 'number', role: 'value.voltage', unit: 'mV' },
+            'view_vol_bat_cur_correct': { name: 'Battery Current Calibration Value', type: 'number', role: 'info.value' },
+            'view_bat_vol_correct': { name: 'Battery Voltage Calibration Value', type: 'number', role: 'info.value' },
+            'view_heating_state': { name: 'Heating Control State', type: 'number', role: 'info.status' },
+            'view_heat_current': { name: 'Heating Current', type: 'number', role: 'value.current', unit: 'A' },
+            'view_temp_mos': { name: 'MOSFET Temperature', type: 'number', role: 'value.temperature', unit: '°C' },
+
+            // Balance Settings & Statuses
+            'view_balan_en': { name: 'Active Balance Enable Setting', type: 'number', role: 'info.status' },
+            'view_cur_balan_max': { name: 'Max Active Balance Current', type: 'number', role: 'value.current', unit: 'A' },
+            'view_vol_start_balan': { name: 'Balance Trigger Voltage Threshold', type: 'number', role: 'value.voltage', unit: 'V' },
+            'view_vol_balan_trig': { name: 'Balance Trigger Voltage Delta', type: 'number', role: 'value.voltage', unit: 'mV' },
+
+            // Protection Voltage & Capacity Settings
+            'view_vol_cell_ovp': { name: 'Cell Overvoltage Protection Threshold', type: 'number', role: 'value.voltage', unit: 'V' },
+            'view_vol_cell_ovpr': { name: 'Cell Overvoltage Protection Recovery', type: 'number', role: 'value.voltage', unit: 'V' },
+            'view_vol_cell_uvp': { name: 'Cell Undervoltage Protection Threshold', type: 'number', role: 'value.voltage', unit: 'V' },
+            'view_vol_cell_uvpr': { name: 'Cell Undervoltage Protection Recovery', type: 'number', role: 'value.voltage', unit: 'V' },
+            'view_vol_bat_ovp': { name: 'Pack Overvoltage Protection Threshold', type: 'number', role: 'value.voltage', unit: 'V' },
+            'view_vol_bat_uvp': { name: 'Pack Undervoltage Protection Threshold', type: 'number', role: 'value.voltage', unit: 'V' },
+            'view_vol_sys_pwr_off': { name: 'System Power Off Voltage Threshold', type: 'number', role: 'value.voltage', unit: 'V' },
+            'view_vol_smart_sleep': { name: 'Smart Sleep Voltage Threshold', type: 'number', role: 'value.voltage', unit: 'V' },
+            'view_vol_soc_100': { name: '100% SOC Voltage Threshold', type: 'number', role: 'value.voltage', unit: 'V' },
+            'view_vol_soc_0': { name: '0% SOC Voltage Threshold', type: 'number', role: 'value.voltage', unit: 'V' },
+
+            // Protection Current & Delay Settings
+            'view_cur_bat_c_oc': { name: 'Charge Overcurrent Protection Threshold', type: 'number', role: 'value.current', unit: 'A' },
+            'view_tim_bat_c_ocp_dly': { name: 'Charge Overcurrent Protection Delay', type: 'number', role: 'value.interval', unit: 's' },
+            'view_tim_bat_c_ocpr_dly': { name: 'Charge Overcurrent Recovery Delay', type: 'number', role: 'value.interval', unit: 's' },
+            'view_cur_bat_dc_oc': { name: 'Discharge Overcurrent Protection Threshold', type: 'number', role: 'value.current', unit: 'A' },
+            'view_tim_bat_dc_ocp_dly': { name: 'Discharge Overcurrent Protection Delay', type: 'number', role: 'value.interval', unit: 's' },
+            'view_tim_bat_dc_ocpr_dly': { name: 'Discharge Overcurrent Recovery Delay', type: 'number', role: 'value.interval', unit: 's' },
+            'view_scp_delay': { name: 'Short Circuit Protection Delay', type: 'number', role: 'value.interval', unit: 'us' },
+            'view_tim_bat_scpr_dly': { name: 'Short Circuit Protection Recovery Delay', type: 'number', role: 'value.interval', unit: 's' },
+
+            // Protection Temperature Settings
+            'view_tmp_bat_cot': { name: 'Charge Overtemperature Protection Threshold', type: 'number', role: 'value.temperature', unit: '°C' },
+            'view_tmp_bat_cotpr': { name: 'Charge Overtemperature Recovery Threshold', type: 'number', role: 'value.temperature', unit: '°C' },
+            'view_tmp_bat_dot': { name: 'Discharge Overtemperature Protection Threshold', type: 'number', role: 'value.temperature', unit: '°C' },
+            'view_tmp_bat_dotpr': { name: 'Discharge Overtemperature Recovery Threshold', type: 'number', role: 'value.temperature', unit: '°C' },
+            'view_tmp_bat_cut': { name: 'Charge Undertemperature Protection Threshold', type: 'number', role: 'value.temperature', unit: '°C' },
+            'view_tmp_bat_cutpr': { name: 'Charge Undertemperature Recovery Threshold', type: 'number', role: 'value.temperature', unit: '°C' },
+            'view_tmp_mos_otp': { name: 'MOSFET Overtemperature Protection Threshold', type: 'number', role: 'value.temperature', unit: '°C' },
+            'view_tmp_mos_otpr': { name: 'MOSFET Overtemperature Recovery Threshold', type: 'number', role: 'value.temperature', unit: '°C' },
+
+            // Setup / Configuration info
+            'view_setup_cell_count': { name: 'Configured Cell Count', type: 'number', role: 'info.value', unit: 'cells' },
+            'view_cap_bat_cell': { name: 'Configured Battery Cell Capacity', type: 'number', role: 'value.capacity', unit: 'Ah' },
+            'view_dev_addr': { name: 'Device Communication Address', type: 'number', role: 'info.address' },
+            'view_tim_precharge': { name: 'Precharge Time Duration', type: 'number', role: 'value.interval', unit: 'ms' },
+            'view_tim_smart_sleep': { name: 'Smart Sleep Time Delay', type: 'number', role: 'value.interval', unit: 'h' },
+            'view_func_bit_field': { name: 'Function Bit Field Configuration', type: 'number', role: 'info.status' }
         };
 
         for (const [key, val] of Object.entries(pack)) {
@@ -701,6 +762,32 @@ class GobelBmsMonitor extends utils.Adapter {
                             native: {}
                         });
                         await this.setStateAsync(tempId, val[t], true);
+                    }
+                }
+            } else if (key === 'cell_resistances') {
+                if (Array.isArray(val)) {
+                    const resFolderId = `${packId}.cell_resistances`;
+                    await this.setObjectNotExistsAsync(resFolderId, {
+                        type: 'folder',
+                        common: { name: 'Cell Resistances' },
+                        native: {}
+                    });
+
+                    for (let r = 0; r < val.length; r++) {
+                        const resId = `${resFolderId}.cell_res_${String(r + 1).padStart(2, '0')}`;
+                        await this.setObjectNotExistsAsync(resId, {
+                            type: 'state',
+                            common: {
+                                name: `Cell ${r + 1} Resistance`,
+                                type: 'number',
+                                role: 'value',
+                                unit: 'mΩ',
+                                read: true,
+                                write: false
+                            },
+                            native: {}
+                        });
+                        await this.setStateAsync(resId, val[r], true);
                     }
                 }
             } else if (fieldDefinitions[key]) {

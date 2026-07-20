@@ -114,18 +114,110 @@ For Pace BMS and TDT BMS RS232 communication, refer to the pinout below:
 * **JK BMS**: Connect to the **RS485B** or **RS485C** interface. Set the Master BMS DIP switches to `0000`.
 * **TDT BMS**: Connect to the **RS232** interface.
 
-## How to Transfer Data to Home Assistant
-If you want to transfer the battery data from ioBroker to an existing Home Assistant instance, you can do so easily via MQTT:
+## BMS Feature & Telemetry Availability Matrix
 
-1. **Install the MQTT Client Adapter in ioBroker**:
-   * In ioBroker Admin, search for and install the **mqtt-client** adapter.
-   * Configure it to connect to your existing Home Assistant MQTT broker.
-2. **Enable MQTT Publishing for BMS States**:
-   * Navigate to the **Objects** tab in the ioBroker Admin panel.
-   * Expand the folder structure for `gobel-bms-monitor.<instance>` until you find the states you want to publish.
-   * Click on the **Custom settings** (gear icon) at the far right of the state row.
-   * Enable the settings under **mqtt-client**, tick **Enable**, and ensure the **Publish** action is active.
-   * Save the settings. ioBroker will now automatically publish these states to your Home Assistant MQTT broker.
+The telemetry data and configuration parameters available depend on the BMS model and protocol supported by your battery hardware:
+
+| Telemetry / Parameter | Pace BMS (RS232/RS485/WiFi) | JK BMS (55AA Protocol) | TDT BMS (RS232) |
+| :--- | :---: | :---: | :---: |
+| Voltage, Current, Power, SoC, SoH | ✅ | ✅ | ✅ |
+| Remaining / Full / Design Capacity | ✅ | ✅ | ✅ |
+| Cycle Count | ✅ | ✅ | ✅ |
+| Individual Cell Voltages & Min/Max/Diff | ✅ | ✅ | ✅ |
+| Temperature Sensors (Cells / Ambient) | ✅ | ✅ | ✅ |
+| MOSFET Temperature Sensor | ✅ | ✅ | ✅ |
+| Charge / Discharge MOSFET Control States | ✅ | ✅ | ❌ |
+| Active Balance Current & Trigger Settings | ❌ | ✅ | ❌ |
+| Cumulative Energy Charged / Discharged (Wh) | ✅ | ❌ | ✅ |
+| Cell Internal Resistances (mΩ) | ❌ | ✅ | ❌ |
+| Comprehensive Alarms (OVP, UVP, OTP, UTP, OCP) | ✅ | ✅ | ✅ |
+
+## Telemetry & Sensor Definitions Glossary
+
+Below is a reference of key sensor states, specifying which BMS protocol they belong to, their exact physical meanings, and units:
+
+| State Key / Field Name | Friendly Name | Unit / Type | Supported BMS | Description / Clarification |
+| :--- | :--- | :---: | :---: | :--- |
+| `view_voltage` | Voltage | V | All (Pace / JK / TDT) | **Telemetry**: Total battery pack voltage. |
+| `view_current` | Current | A | All (Pace / JK / TDT) | **Telemetry**: Total battery pack current (Positive: charging, Negative: discharging). |
+| `view_power` | Power | kW | All (Pace / JK / TDT) | **Telemetry**: Calculated real-time battery power. |
+| `view_SOC` | State of Charge (SOC) | % | All (Pace / JK / TDT) | **Telemetry**: Battery state of charge percentage (0-100%). |
+| `view_SOH` | State of Health (SOH) | % | All (Pace / JK / TDT) | **Telemetry**: Battery state of health percentage (0-100%). |
+| `view_remain_capacity` | Remaining Capacity | Ah | All (Pace / JK / TDT) | **Telemetry**: Remaining battery capacity in Ampere-hours. |
+| `view_full_capacity` | Full Charge Capacity | Ah | All (Pace / JK / TDT) | **Telemetry**: Full charge capacity in Ampere-hours. |
+| `view_design_capacity` | Design Capacity | Ah | All (Pace / JK / TDT) | **Telemetry**: Factory design capacity in Ampere-hours. |
+| `view_cycle_number` | Cycle Count | cycles | All (Pace / JK / TDT) | **Telemetry**: Total charge/discharge cycle count. |
+| `cell_voltages` | Cell Voltages | mV | All (Pace / JK / TDT) | **Telemetry**: Individual cell voltages (auto-expanded under `cells.cell_XX`). |
+| `temperatures` | Temperatures | °C | All (Pace / JK / TDT) | **Telemetry**: Individual temperature sensors (auto-expanded under `temperatures.temp_XX`). |
+| `view_energy_charged` | Interval Charged Energy | Wh | Pace / TDT | **Interval Energy**: Incremental energy charged within the polling interval (Watt-hours). |
+| `view_energy_discharged` | Interval Discharged Energy | Wh | Pace / TDT | **Interval Energy**: Incremental energy discharged within the polling interval (Watt-hours). |
+| `charge_mos_state` | Charge MOSFET Control State | boolean | Pace / JK | **Hardware Control**: State of the charging MOSFET switch (True: ON / False: OFF). |
+| `discharge_mos_state` | Discharge MOSFET Control State | boolean | Pace / JK | **Hardware Control**: State of the discharging MOSFET switch (True: ON / False: OFF). |
+| `view_bat_charge_en` | Battery Charge Enable Setting | 0 / 1 | JK BMS | **BMS Configuration**: Indicates if charging is enabled in BMS logic (1: Enabled / 0: Disabled). |
+| `view_bat_discharge_en` | Battery Discharge Enable Setting | 0 / 1 | JK BMS | **BMS Configuration**: Indicates if discharging is enabled in BMS logic (1: Enabled / 0: Disabled). |
+| `view_charger_plugged` | Charger Connection Status | 0 / 1 | JK BMS | **Physical Detection**: Indicates whether charger plug is physically detected (1: Plugged / 0: Unplugged). |
+| `view_vol_charge_cur` | Charge Current Sensor Voltage | mV | JK BMS | **Sensor AD Voltage**: Raw sampled voltage of the charge current sensor (millivolts). |
+| `view_vol_discharge_cur` | Discharge Current Sensor Voltage | mV | JK BMS | **Sensor AD Voltage**: Raw sampled voltage of the discharge current sensor (millivolts). |
+| `view_balan_en` | Active Balance Enable Setting | 0 / 1 | JK BMS | **BMS Configuration**: Indicates if active cell balancing is enabled (1: Enabled / 0: Disabled). |
+| `view_cur_balan_max` | Max Active Balance Current | A | JK BMS | **Balance Specification**: Maximum balancing current capability of equalizer. |
+| `view_vol_start_balan` | Balance Trigger Voltage Threshold | V | JK BMS | **Balance Threshold**: Minimum cell voltage required to activate balancing. |
+| `cell_resistances` | Cell Resistances | mΩ | JK BMS | **Internal Resistance**: Array of individual cell internal resistances (auto-expanded under `cell_resistances.cell_res_XX`). |
+| `view_temp_mos` | MOSFET Temperature | °C | All (Pace / JK / TDT) | **Telemetry**: Temperature sensor reading on the MOSFET power stage. |
+| `view_heating_state` | Heating Control State | 0 / 1 | JK BMS | **Control Status**: Indicates whether battery heating element is active (1: Active / 0: Inactive). |
+| `view_heat_current` | Heating Current | A | JK BMS | **Telemetry**: Current consumption of battery heater. |
+| `define_number_p` | Parallel Pack Count Definition | number | Pace BMS | **BMS Configuration**: Hardware defined parallel battery count setting. |
+
+### What are `view_energy_charged` and `view_energy_discharged`?
+
+**Important Definition**: Most BMS hardware protocols **do NOT** store an onboard hardware energy meter (kWh). Therefore, `view_energy_charged` and `view_energy_discharged` are **NOT lifetime total energy readings from the battery**.
+
+Instead, they represent **incremental energy calculated in software for the current polling interval** (e.g. over 5 seconds):
+
+$$\Delta E = |P| \times \Delta t \times \frac{1000}{3600} \text{ (Wh)}$$
+
+- **What these values represent**: Each time the adapter polls the BMS, it calculates the energy charged or discharged $\Delta E$ (in Watt-hours) during that specific polling window ($\Delta t$, e.g., 5s) based on instantaneous power $P$ (kW).
+- **User Accumulation Required**: Because these values represent short polling interval deltas (or in-memory accumulators during adapter uptime that reset on restart), **users who want total cumulative energy (daily, monthly, or lifetime total kWh) MUST accumulate these interval values themselves in their smart home platform**:
+  - **In Home Assistant**: Use the **`utility_meter`** helper or **`integration`** (Riemann sum) sensor to accumulate the power/energy sensors into permanent daily/total kWh entities.
+  - **In ioBroker**: Use the **Statistics**, **History**, or **SQL Database** adapters to sum up and store cumulative energy over time.
+
+## Tips & Tricks: Handling & Forwarding Array Sensors to Home Assistant
+
+While the adapter automatically expands `cell_voltages`, `temperatures`, and `cell_resistances` into individual state objects (e.g. `cell_res_01`, `cell_res_02`), you can also create custom ioBroker **Aliases** for any array values if you wish to remap or transform states before sending them over MQTT to Home Assistant.
+
+To create an Alias for array element index 0 (`val[0]`):
+1. In ioBroker Admin, open the **Objects** tab.
+2. Create a new state object under `alias.0` (for example, `alias.0.gobel-bms-monitor.0.pack_00.cell_res_01`).
+3. Set the Object JSON definition as follows:
+
+```json
+{
+  "_id": "alias.0.gobel-bms-monitor.0.pack_00.cell_res_01",
+  "type": "state",
+  "common": {
+    "name": "Cell Resistance 01",
+    "type": "number",
+    "unit": "mΩ",
+    "alias": {
+      "id": "gobel-bms-monitor.0.pack_00.cell_resistances",
+      "read": "val[0]"
+    },
+    "role": "value",
+    "read": true,
+    "write": false,
+    "custom": {
+      "mqtt-client.0": {
+        "enabled": true,
+        "publish": true,
+        "pubChangesOnly": false,
+        "pubAsObject": false,
+        "qos": false,
+        "retain": false
+      }
+    }
+  },
+  "native": {}
+}
+```
 
 ## License
 Apache License 2.0 (Copyright 2026 fancyui)
