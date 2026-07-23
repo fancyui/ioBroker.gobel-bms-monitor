@@ -127,6 +127,8 @@ Nachfolgend finden Sie eine Übersicht der wichtigsten Sensorzustände, ihre gen
 | `view_voltage` | Voltage | V | Alle (Pace / JK / TDT) | **Telemetrie**: Gesamte Batteriepack-Spannung. |
 | `view_current` | Current | A | Alle (Pace / JK / TDT) | **Telemetrie**: Gesamter Batteriepack-Strom (Positiv: Laden, Negativ: Entladen). |
 | `view_power` | Power | kW | Alle (Pace / JK / TDT) | **Telemetrie**: Berechnete Echtzeit-Batterieleistung. |
+| `view_power_charging` | Charging Power | kW | Alle (Pace / JK / TDT) | **Telemetrie**: Echtzeit-Ladeleistung (0 beim Entladen oder Leerlauf). |
+| `view_power_discharging` | Discharging Power | kW | Alle (Pace / JK / TDT) | **Telemetrie**: Echtzeit-Entladeleistung (positiver Wert, 0 beim Laden oder Leerlauf). |
 | `view_SOC` | State of Charge (SOC) | % | Alle (Pace / JK / TDT) | **Telemetrie**: Ladezustand der Batterie in Prozent (0-100%). |
 | `view_SOH` | State of Health (SOH) | % | Alle (Pace / JK / TDT) | **Telemetrie**: Alterungszustand/Gesundheit der Batterie in Prozent (0-100%). |
 | `view_remain_capacity` | Remaining Capacity | Ah | Alle (Pace / JK / TDT) | **Telemetrie**: Verbleibende Batteriekapazität in Ampere-Stunden. |

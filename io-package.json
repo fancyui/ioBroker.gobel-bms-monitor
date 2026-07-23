@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "gobel-bms-monitor",
-    "version": "1.0.17",
+    "version": "1.0.18",
     "news": {
+      "1.0.18": {
+        "en": "Add real-time charging power (view_power_charging) and discharging power (view_power_discharging) sensors.",
+        "zh-cn": "新增实时充电功率 (view_power_charging) 与实时放电功率 (view_power_discharging) 状态传感器。",
+        "de": "Hinzufügen von Echtzeit-Ladeleistungs- (view_power_charging) und Entladeleistungs-Sensoren (view_power_discharging)."
+      },
       "1.0.17": {
         "en": "Expand state definitions mapping with full human-readable names and correct units. Auto-expand cell_resistances array into individual states. Update README with BMS feature matrix, glossary, and interval energy explanations.",
         "zh-cn": "扩展全量传感器定义映射为无缩写的清晰中文/英文名称及正确单位。自动将 cell_resistances 内阻数组展开为单体独立状态。在 README 中新增 BMS 功能对比表、传感器含义明细表及单次轮询电量说明。",

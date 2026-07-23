@@ -127,6 +127,8 @@
 | `view_voltage` | Voltage | V (伏特) | 全部 (Pace / JK / TDT) | **遥测数据**：电池包总电压。 |
 | `view_current` | Current | A (安培) | 全部 (Pace / JK / TDT) | **遥测数据**：电池包总电流（正值：充电，负值：放电）。 |
 | `view_power` | Power | kW (千瓦) | 全部 (Pace / JK / TDT) | **遥测数据**：实时总功率。 |
+| `view_power_charging` | Charging Power | kW (千瓦) | 全部 (Pace / JK / TDT) | **遥测数据**：实时充电功率（放电或静置时为 0）。 |
+| `view_power_discharging` | Discharging Power | kW (千瓦) | 全部 (Pace / JK / TDT) | **遥测数据**：实时放电功率（正数值，充电或静置时为 0）。 |
 | `view_SOC` | State of Charge (SOC) | % | 全部 (Pace / JK / TDT) | **遥测数据**：电池剩余电量百分比 (0-100%)。 |
 | `view_SOH` | State of Health (SOH) | % | 全部 (Pace / JK / TDT) | **遥测数据**：电池健康度百分比 (0-100%)。 |
 | `view_remain_capacity` | Remaining Capacity | Ah (安时) | 全部 (Pace / JK / TDT) | **遥测数据**：电池当前剩余容量。 |

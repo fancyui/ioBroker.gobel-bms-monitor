@@ -141,6 +141,8 @@ Below is a reference of key sensor states, specifying which BMS protocol they be
 | `view_voltage` | Voltage | V | All (Pace / JK / TDT) | **Telemetry**: Total battery pack voltage. |
 | `view_current` | Current | A | All (Pace / JK / TDT) | **Telemetry**: Total battery pack current (Positive: charging, Negative: discharging). |
 | `view_power` | Power | kW | All (Pace / JK / TDT) | **Telemetry**: Calculated real-time battery power. |
+| `view_power_charging` | Charging Power | kW | All (Pace / JK / TDT) | **Telemetry**: Real-time charging power (0 when discharging or idle). |
+| `view_power_discharging` | Discharging Power | kW | All (Pace / JK / TDT) | **Telemetry**: Real-time discharging power (positive value, 0 when charging or idle). |
 | `view_SOC` | State of Charge (SOC) | % | All (Pace / JK / TDT) | **Telemetry**: Battery state of charge percentage (0-100%). |
 | `view_SOH` | State of Health (SOH) | % | All (Pace / JK / TDT) | **Telemetry**: Battery state of health percentage (0-100%). |
 | `view_remain_capacity` | Remaining Capacity | Ah | All (Pace / JK / TDT) | **Telemetry**: Remaining battery capacity in Ampere-hours. |

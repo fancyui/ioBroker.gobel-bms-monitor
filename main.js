@@ -634,6 +634,8 @@ class GobelBmsMonitor extends utils.Adapter {
             'view_current': { name: 'Current', type: 'number', role: 'value.current', unit: 'A' },
             'view_voltage': { name: 'Voltage', type: 'number', role: 'value.voltage', unit: 'V' },
             'view_power': { name: 'Power', type: 'number', role: 'value.power', unit: 'kW' },
+            'view_power_charging': { name: 'Charging Power', type: 'number', role: 'value.power', unit: 'kW' },
+            'view_power_discharging': { name: 'Discharging Power', type: 'number', role: 'value.power', unit: 'kW' },
             'view_energy_charged': { name: 'Interval Charged Energy', type: 'number', role: 'value.energy', unit: 'Wh' },
             'view_energy_discharged': { name: 'Interval Discharged Energy', type: 'number', role: 'value.energy', unit: 'Wh' },
             'view_remain_capacity': { name: 'Remaining Capacity', type: 'number', role: 'value.capacity', unit: 'Ah' },
@@ -706,6 +708,12 @@ class GobelBmsMonitor extends utils.Adapter {
             'view_tim_smart_sleep': { name: 'Smart Sleep Time Delay', type: 'number', role: 'value.interval', unit: 'h' },
             'view_func_bit_field': { name: 'Function Bit Field Configuration', type: 'number', role: 'info.status' }
         };
+
+        if (typeof pack.view_power === 'number') {
+            const p = pack.view_power;
+            pack.view_power_charging = p > 0 ? p : 0;
+            pack.view_power_discharging = p < 0 ? Math.abs(p) : 0;
+        }
 
         for (const [key, val] of Object.entries(pack)) {
             if (key === 'pack_index' || key === 'pack_id') {
