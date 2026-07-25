@@ -1,6 +1,12 @@
 # Changelog
 
-## 1.0.17 (2026-07-20)
+## 1.0.19 (2026-07-25)
+* (fancyui) Fix JKBMS setup frame register parsing for `VolInverterMaxCharge` (Inverter Max Charge Voltage) at offset 38 and `VolFloatCharge` (Float Charge Voltage) at offset 42 (previously misidentified as battery undervoltage/overvoltage protection).
+
+## 1.0.18 (2026-07-25)
+* (fancyui) Add real-time charging power (`view_power_charging`) and discharging power (`view_power_discharging`) sensors.
+
+
 * (fancyui) Expand state definitions mapping in `main.js` with unabbreviated human-readable names, roles, and units across PACE, JK, and TDT BMSs.
 * (fancyui) Automatically expand `cell_resistances` array into individual cell resistance state objects (`cell_res_01`..`16`).
 * (fancyui) Add BMS Feature Availability Matrix, Telemetry Glossary, and Interval Energy Calculation Disclaimer in English, Chinese, and German documentation.

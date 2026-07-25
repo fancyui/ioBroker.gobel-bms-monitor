@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "gobel-bms-monitor",
-    "version": "1.0.18",
+    "version": "1.0.19",
     "news": {
+      "1.0.19": {
+        "en": "Fix JKBMS setup frame register parsing for Inverter Max Charge Voltage (view_vol_inverter_max_charge) and Float Charge Voltage (view_vol_float_charge) at offsets 38 and 42.",
+        "zh-cn": "修复 JKBMS 设置帧偏移 38 与 42 处的逆变器最大充电电压 (view_vol_inverter_max_charge) 与浮充电压 (view_vol_float_charge) 解析。",
+        "de": "Korrektur des JKBMS-Einstellrahmen-Register-Parsings für Inverter Max Charge Voltage und Float Charge Voltage bei den Offsets 38 und 42."
+      },
       "1.0.18": {
         "en": "Add real-time charging power (view_power_charging) and discharging power (view_power_discharging) sensors.",
         "zh-cn": "新增实时充电功率 (view_power_charging) 与实时放电功率 (view_power_discharging) 状态传感器。",
