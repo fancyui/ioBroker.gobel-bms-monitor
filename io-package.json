@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "gobel-battery",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "news": {
+      "1.0.6": {
+        "en": "fix JKBMS view_temp_mos sensor mapping",
+        "zh-cn": "修复 JKBMS view_temp_mos 传感器映射",
+        "de": "Behebung der JKBMS view_temp_mos Sensorzuordnung"
+      },
       "1.0.5": {
         "en": "auto download pyserial",
         "zh-cn": "自动下载 pyserial",
